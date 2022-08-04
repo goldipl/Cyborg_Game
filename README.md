@@ -9,7 +9,7 @@ Cyborg 2D Game
 ## Technologies
 Project was created with:
 * HTML5
-* CSS3
+* SCSS
 * JavaScript
 
 ## Live
