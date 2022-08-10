@@ -6,7 +6,11 @@
           box-sizing: border-box;
 }
 
-.game__section img {
+.game__section {
+  position: relative;
+}
+
+.game__section img.background-image {
   background-repeat: no-repeat;
   background-position: center center;
   border: 2px solid #000000;
@@ -14,6 +18,14 @@
   height: 468px;
   -o-object-fit: contain;
      object-fit: contain;
+}
+
+.game__section img.cyborg-image {
+  position: absolute;
+  bottom: 4px;
+  left: 40px;
+  width: 70px;
+  height: auto;
 }
 
 .container {

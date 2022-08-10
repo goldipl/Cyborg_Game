@@ -1,8 +1,20 @@
-.game__section img {
-    background-repeat: no-repeat;
-    background-position: center center;
-    border: 2px solid #000000;
-    width: 1000px;
-    height: 468px;
-    object-fit: contain;
+.game__section {
+    position: relative;
+
+    img.background-image {
+        background-repeat: no-repeat;
+        background-position: center center;
+        border: 2px solid #000000;
+        width: 1000px;
+        height: 468px;
+        object-fit: contain;
+    }
+
+    img.cyborg-image {
+        position: absolute;
+        bottom: 4px;
+        left: 40px;
+        width: 70px;
+        height: auto;
+    }
 }
