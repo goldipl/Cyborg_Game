@@ -4,7 +4,8 @@
 * [Live](#live)
 
 ## General info
-Cyborg 2D Game
+Game in progress... ❎  
+Cyborg 2D Game.
 
 ## Technologies
 Project was created with:
