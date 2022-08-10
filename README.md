@@ -2,6 +2,7 @@
 * [General info](#general-info)
 * [Technologies](#technologies)
 * [Live](#live)
+* [Background image info](#background-image-info)
 
 ## General info
 Game in progress... ❎  
@@ -15,3 +16,6 @@ Project was created with:
 
 ## Live
 https://goldipl.github.io/Cyborg_Game/
+
+## Background image info
+<a href="https://www.freepik.com/vectors/alien-planet">Alien planet vector created by upklyak - www.freepik.com</a>
