@@ -6,6 +6,16 @@
           box-sizing: border-box;
 }
 
+.game__section img {
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 2px solid #000000;
+  width: 1000px;
+  height: 468px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 .container {
   display: -webkit-box;
   display: -ms-flexbox;
