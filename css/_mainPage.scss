@@ -14,17 +14,20 @@
         align-items: center;
         width: 120px;
         height: 40px;
-        border: 2px solid #FFFFFF;
-        color: #000000;
+        color: #36ebff;
         text-decoration: none;
         border-radius: 16px;
         margin-top: 16px;
         transition: 0.6s;
+        text-shadow: 0px 0px 12px #FFFFFF;
         cursor: pointer;
         &:hover {
             background: #bf63ef;
             color: #FFFFFF;
         }
+    }
+    h1 {
+        margin-top: -88px;
     }
     footer a {
         font-size: 6px;

@@ -3,6 +3,10 @@
 @import './mainPage';
 @import './gameBackground';
 
+body {
+	color: #FFFFFF;
+}
+
 .container {
 	display: flex;
 	flex-direction: column;
