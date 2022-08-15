@@ -21,6 +21,7 @@ const move = (e) => {
         background_position -= 5;
         break;
     }
+    
     cyborg.style.left = `${left_position}px`;
     cyborg.style.bottom = `${bottom_position}px`;
     background.style.left = `${background_position}px`;
