@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;600&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -42,6 +42,6 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font-family: "VT323", monospace;
+  font-family: 'DynaPuff', cursive;
 }
 /*# sourceMappingURL=style.css.map */
