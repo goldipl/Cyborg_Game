@@ -1,6 +1,10 @@
 let left_position = 40;
 let bottom_position = 4;
 
+/**
+ * When the user presses a key, the cyborg moves left or right.
+ * @param e - The event object.
+ */
 const move = (e) => {
     const cyborg = document.querySelector(".cyborg-image");
     switch (e.keyCode) {
