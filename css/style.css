@@ -6,6 +6,47 @@
           box-sizing: border-box;
 }
 
+.container.main-page {
+  margin: 16px auto;
+  width: 70vw;
+  height: 80vh;
+  padding: 16px;
+  border: 2px solid #bf63ef;
+  background: url("./../img/alien-background.jpg") no-repeat;
+  background-position: bottom right;
+}
+
+.container a.playButton {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 120px;
+  height: 40px;
+  border: 2px solid #FFFFFF;
+  border-radius: 16px;
+  margin: 16px;
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+  cursor: pointer;
+}
+
+.container a.playButton:hover {
+  background: #bf63ef;
+  color: #FFFFFF;
+}
+
+.container footer a {
+  font-size: 6px;
+  color: #000000;
+  text-decoration: none;
+}
+
 .game__section {
   position: relative;
 }
