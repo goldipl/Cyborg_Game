@@ -79,7 +79,7 @@
 
 .game__section img.background-image {
   position: absolute;
-  background: url(./../img/alien-background.jpg);
+  background: url(./../img/game-background.jpg);
   background-repeat: repeat-x;
   background-position: center bottom;
   background-size: 1000px 468px;
