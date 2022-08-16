@@ -17,7 +17,10 @@ const move = (e) => {
 
         case 39:
         // Move right
-        left_position += 5;
+        left_position += 2;
+        if (cyborg.style.left === `180px`) {
+            left_position = 180;
+        }
         background_position -= 5;
         break;
     }
