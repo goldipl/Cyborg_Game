@@ -91,7 +91,15 @@
 
 .game__section img.cyborg-image {
   position: absolute;
-  bottom: 4px;
+  bottom: 0;
+  left: 40px;
+  width: 70px;
+  height: auto;
+}
+
+.game__section img.monster {
+  position: absolute;
+  bottom: 0;
   left: 40px;
   width: 70px;
   height: auto;
