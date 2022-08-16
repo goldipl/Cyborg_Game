@@ -1,5 +1,5 @@
 let left_position = 40;
-let bottom_position = 4;
+let bottom_position = 0;
 let background_position = 0;
 
 /**
