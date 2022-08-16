@@ -1,9 +1,10 @@
+/* This is the code that moves the cyborg. */
 let left_position = 40;
 let bottom_position = 0;
 let background_position = 0;
 
 /**
- * When the user presses a key, the cyborg moves left or right.
+ * The function moves the cyborg image left and right, and moves the background image left.
  * @param e - The event object.
  */
 const move = (e) => {
@@ -30,4 +31,17 @@ const move = (e) => {
     background.style.left = `${background_position}px`;
 }
 
+/* Listening for a keydown event and then calling the move function. */
 document.addEventListener("keydown", move);
+
+/* Creating a monster and placing it on the screen. */
+let monster_position = 600;
+
+const monster = document.createElement('img');
+monster.src = './img/monster.svg';
+monster.width = 80;
+monster.height = 80;
+monster.classList.add('monster');
+const container = document.querySelector('.game-screen .container .game__section').appendChild(monster);
+
+monster.style.left = `${monster_position}px`;
