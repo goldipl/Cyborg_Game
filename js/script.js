@@ -30,7 +30,7 @@ document.addEventListener("keydown", move);
 
 checkCollision = () => {
     if (monster.offsetLeft === cyborg.offsetLeft)  {
-        console.log("Live -1");
+        document.querySelector('.live').remove();
     }
 };
 
