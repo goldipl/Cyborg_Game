@@ -53,6 +53,25 @@
         text-shadow: 2px 2px #000000;
         font-size: 32px;
     }
+
+    .lives-container {
+        position: absolute;
+        top: 8px;
+        right: 16px;
+        display: block;
+        width: 40px;
+        height: 40px;
+    }
+
+    .lives-container .live {
+        display: block;
+        background: url(./../img/heart.svg);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 40px 40px;
+        width: 40px;
+        height: 40px;
+    }
 }
 
 @keyframes monster {
