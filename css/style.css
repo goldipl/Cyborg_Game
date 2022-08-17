@@ -101,9 +101,11 @@
 .game__section img.monster {
   position: absolute;
   bottom: 0;
-  left: 40px;
+  left: 400px;
   width: 70px;
   height: auto;
+  -webkit-animation: monster 3.5s linear infinite;
+          animation: monster 3.5s linear infinite;
 }
 
 .game__section .points-container {
@@ -114,6 +116,24 @@
   color: #FFFFFF;
   text-shadow: 2px 2px #000000;
   font-size: 32px;
+}
+
+@-webkit-keyframes monster {
+  0% {
+    left: 1200px;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes monster {
+  0% {
+    left: 1200px;
+  }
+  100% {
+    left: 0;
+  }
 }
 
 body {

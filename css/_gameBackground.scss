@@ -34,9 +34,10 @@
     img.monster {
         position: absolute;
         bottom: 0;
-        left: 40px;
+        left: 400px;
         width: 70px;
         height: auto;
+        animation: monster 3.5s linear infinite;
     }
 
     .points-container {
@@ -48,4 +49,15 @@
         text-shadow: 2px 2px #000000;
         font-size: 32px;
     }
+}
+
+@keyframes monster {
+    0% {
+        left: 1200px;
+    }
+
+    100% {
+        left: 0;
+    }
+    
 }
