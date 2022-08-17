@@ -105,6 +105,16 @@
   height: auto;
 }
 
+.game__section .points-container {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  display: block;
+  color: #FFFFFF;
+  text-shadow: 2px 2px #000000;
+  font-size: 32px;
+}
+
 body {
   color: #FFFFFF;
 }
