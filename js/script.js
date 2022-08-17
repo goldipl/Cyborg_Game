@@ -37,4 +37,4 @@ checkCollision = () => {
     }
 };
 
-setInterval(checkCollision, 10);
+setInterval(checkCollision, 20);
