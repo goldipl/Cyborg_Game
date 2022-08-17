@@ -40,6 +40,10 @@
         animation: monster 3.5s linear infinite;
     }
 
+    img.cyborg-image.jump {
+        animation: jump 0.5s ease-in-out;
+    }
+
     .points-container {
         position: absolute;
         top: 8px;
@@ -59,5 +63,14 @@
     100% {
         left: 0;
     }
-    
+}
+
+@keyframes jump {
+    0% {
+        bottom: 0px;
+    }
+
+    100% {
+        bottom: 120px;
+    }
 }
