@@ -29,8 +29,12 @@ const move = (e) => {
 document.addEventListener("keydown", move);
 
 checkCollision = () => {
-    if (monster.offsetLeft === cyborg.offsetLeft)  {
-        document.querySelector('.live').remove();
+    if (monster.offsetLeft === cyborg.offsetLeft && (cyborg.offsetTop > 300)) {
+        if (document.querySelector('.live') !== null) {
+            document.querySelector('.live').remove();
+        } else {
+            alert('GAME OVER');
+        }     
     }
 };
 
