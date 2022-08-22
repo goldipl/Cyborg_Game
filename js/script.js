@@ -28,14 +28,23 @@ const move = (e) => {
 /* Listening for a keydown event and then calling the move function. */
 document.addEventListener("keydown", move);
 
+addPoints = () => {
+    var points = document.querySelector('.points-container');
+    points.innerText++;
+}
+
 checkCollision = () => {
-    if (monster.offsetLeft === cyborg.offsetLeft && (cyborg.offsetTop > 300)) {
-        if (document.querySelector('.live') !== null) {
+    if ((monster.offsetLeft === cyborg.offsetLeft) && (cyborg.offsetTop > 300)) {
+        if (document.querySelectorAll('.live').length !== 0) {
             document.querySelector('.live').remove();
-        } else {
-            alert('GAME OVER');
-        }     
-    }
-};
+        } else if (document.querySelectorAll('.live').length === 0) {
+            document.querySelector('.game-over').classList.add('show');
+            monster.style.display = "none";
+            cyborg.classList.add('stop-jump');
+        } 
+    } else if (monster.offsetLeft !== cyborg.offsetLeft && (cyborg.offsetTop <= 300)) {
+        addPoints();     
+    } 
+}; 
 
 setInterval(checkCollision, 20);
