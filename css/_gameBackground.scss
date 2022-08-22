@@ -44,6 +44,10 @@
         animation: jump 0.5s ease-in-out;
     }
 
+    img.cyborg-image.stop-jump {
+        animation: none;
+    }
+    
     .points-container {
         position: absolute;
         top: 8px;
@@ -78,6 +82,20 @@
         top: 8px;
         right: 72px;
         font-size: 28px;
+        text-shadow: 2px 2px #000000;
+    }
+
+    .game-over {
+        display: none;
+    }
+
+    .game-over.show {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 40px;
         text-shadow: 2px 2px #000000;
     }
 }
