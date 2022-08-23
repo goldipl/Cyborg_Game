@@ -28,11 +28,15 @@ const move = (e) => {
 /* Listening for a keydown event and then calling the move function. */
 document.addEventListener("keydown", move);
 
+/* Adding points to the game. */
 addPoints = () => {
     var points = document.querySelector('.points-container');
     points.innerText++;
 }
 
+/* Checking if the cyborg and the monster are in the same position. If they are, it will remove a life.
+If there are no lives left, it will display the game over screen. If they are not in the same
+position, it will add points. */
 checkCollision = () => {
     if ((monster.offsetLeft === cyborg.offsetLeft) && (cyborg.offsetTop > 300)) {
         if (document.querySelectorAll('.live').length !== 0) {
@@ -47,4 +51,5 @@ checkCollision = () => {
     } 
 }; 
 
+/* Checking if the cyborg and the monster are in the same position every 20 milliseconds. */
 setInterval(checkCollision, 20);
