@@ -104,8 +104,8 @@
   left: 400px;
   width: 45px;
   height: auto;
-  -webkit-animation: monster 3.5s linear infinite;
-          animation: monster 3.5s linear infinite;
+  -webkit-animation: monster 3.5s linear infinite, walk 2s linear infinite;
+          animation: monster 3.5s linear infinite, walk 2s linear infinite;
 }
 
 .game__section img.cyborg-image.jump {
@@ -215,6 +215,44 @@
   }
   100% {
     bottom: 160px;
+  }
+}
+
+@-webkit-keyframes walk {
+  0% {
+    -webkit-transform: rotate(10deg);
+            transform: rotate(10deg);
+  }
+  50% {
+    -webkit-transform: rotate(-10deg);
+            transform: rotate(-10deg);
+  }
+  75% {
+    -webkit-transform: rotate(10deg);
+            transform: rotate(10deg);
+  }
+  100% {
+    -webkit-transform: rotate(-10deg);
+            transform: rotate(-10deg);
+  }
+}
+
+@keyframes walk {
+  0% {
+    -webkit-transform: rotate(10deg);
+            transform: rotate(10deg);
+  }
+  50% {
+    -webkit-transform: rotate(-10deg);
+            transform: rotate(-10deg);
+  }
+  75% {
+    -webkit-transform: rotate(10deg);
+            transform: rotate(10deg);
+  }
+  100% {
+    -webkit-transform: rotate(-10deg);
+            transform: rotate(-10deg);
   }
 }
 
