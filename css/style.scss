@@ -2,9 +2,10 @@
 @import './reset';
 @import './mainPage';
 @import './gameBackground';
+@import './variables';
 
 body {
-	color: #FFFFFF;
+	color: $whiteColor01;
 }
 
 .container {

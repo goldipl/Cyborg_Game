@@ -1,10 +1,11 @@
+@import './variables';
 .container {
 	&.main-page {
         margin: 16px auto;
         width: 70vw;
         height: 80vh;
         padding: 16px;
-        border: 2px solid #bf63ef;
+        border: 2px solid $pinkColor01;
         background: url('./../img/alien-background.jpg') no-repeat;
         background-position: bottom right;
     }
@@ -15,16 +16,16 @@
         font-size: 24px;
         width: 160px;
         height: 40px;
-        color: #36ebff;
+        color: $azureColor01;
         text-decoration: none;
         border-radius: 16px;
         margin-top: 16px;
         transition: 0.6s;
-        text-shadow: 0px 0px 12px #FFFFFF;
+        text-shadow: 0px 0px 12px $whiteColor01;
         cursor: pointer;
         &:hover {
-            background: #bf63ef;
-            color: #FFFFFF;
+            background: $pinkColor01;
+            color: $whiteColor01
         }
     }
     h1 {
@@ -34,7 +35,7 @@
     }
     footer a {
         font-size: 6px;
-        color: #000000;
+        color: $blackColor01;
         text-decoration: none;
     }
 }
