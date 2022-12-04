@@ -41,8 +41,10 @@ checkCollision = () => {
     if ((monster.offsetLeft === cyborg.offsetLeft) && (cyborg.offsetTop > 300)) {
         if (document.querySelectorAll('.live').length !== 0) {
             document.querySelector('.live').remove();
-        } else if (document.querySelectorAll('.live').length === 0) {
+        } 
+        if (document.querySelectorAll('.live').length === 0) {
             document.querySelector('.game-over').classList.add('show');
+            document.querySelector('.play-again').classList.add('show');
             monster.style.display = "none";
             cyborg.classList.add('stop-jump');
         } 
