@@ -88,16 +88,39 @@
 
     .game-over {
         display: none;
+        &.show {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            text-shadow: 2px 2px $blackColor01;
+        }
     }
 
-    .game-over.show {
-        display: block;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 40px;
-        text-shadow: 2px 2px $blackColor01;
+    .play-again {
+        display: none;
+        &.show {
+            display: block;
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
+            text-shadow: 2px 2px $blackColor01;
+            background: $pinkColor01;
+            color: $whiteColor01;
+            text-decoration: none;
+            padding: 8px;
+            margin-top: 16px;
+            border-radius: 16px;
+            transition: 0.6s;
+            cursor: pointer;
+            &:hover {
+                color: $blackColor01;
+            }
+        }
     }
 }
 

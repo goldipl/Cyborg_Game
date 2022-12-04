@@ -170,6 +170,34 @@
   text-shadow: 2px 2px #000000;
 }
 
+.game__section .play-again {
+  display: none;
+}
+
+.game__section .play-again.show {
+  display: block;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 32px;
+  text-shadow: 2px 2px #000000;
+  background: #bf63ef;
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 8px;
+  margin-top: 16px;
+  border-radius: 16px;
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+  cursor: pointer;
+}
+
+.game__section .play-again.show:hover {
+  color: #000000;
+}
+
 @-webkit-keyframes monster {
   0% {
     left: 1200px;
