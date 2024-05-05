@@ -49,10 +49,10 @@ checkCollision = () => {
         ) {
             if (document.querySelectorAll('.live').length !== 0) {
                 document.querySelector('.live').remove();
-                collisionFlag = true; // Ustawiamy flagę kolizji
+                collisionFlag = true;
                 setTimeout(() => {
-                    collisionFlag = false; // Resetujemy flagę po pewnym czasie
-                }, 1000); // Opóźnienie między kolejnymi kolizjami (1 sekunda)
+                    collisionFlag = false; 
+                }, 1000); 
             } 
             if (document.querySelectorAll('.live').length === 0) {
                 document.querySelector('.game-over').classList.add('show');
