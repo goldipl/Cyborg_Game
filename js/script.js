@@ -34,33 +34,37 @@ addPoints = () => {
     points.innerText++;
 }
 
-checkCollision = () => {
-    // Getting the bounding boxes of cyborg and monster
-    const cyborgRect = cyborg.getBoundingClientRect();
-    const monsterRect = monster.getBoundingClientRect();
+let collisionFlag = false;
 
-    // Checking for collision by comparing bounding box positions
-    if (
-        cyborgRect.right >= monsterRect.left &&
-        cyborgRect.left <= monsterRect.right &&
-        cyborgRect.bottom >= monsterRect.top &&
-        cyborgRect.top <= monsterRect.bottom
-    ) {
-        // Collision happened
-        if (document.querySelectorAll('.live').length !== 0) {
-            document.querySelector('.live').remove();
-        } 
-        if (document.querySelectorAll('.live').length === 0) {
-            document.querySelector('.game-over').classList.add('show');
-            document.querySelector('.play-again').classList.add('show');
-            monster.style.display = "none";
-            cyborg.classList.add('stop-jump');
-        } 
-    } else if (cyborg.offsetTop <= 300) {
-        // No collision, add points
-        addPoints();
+checkCollision = () => {
+    if (!collisionFlag) {
+        const cyborgRect = cyborg.getBoundingClientRect();
+        const monsterRect = monster.getBoundingClientRect();
+
+        if (
+            cyborgRect.right >= monsterRect.left &&
+            cyborgRect.left <= monsterRect.right &&
+            cyborgRect.bottom >= monsterRect.top &&
+            cyborgRect.top <= monsterRect.bottom
+        ) {
+            if (document.querySelectorAll('.live').length !== 0) {
+                document.querySelector('.live').remove();
+                collisionFlag = true; // Ustawiamy flagę kolizji
+                setTimeout(() => {
+                    collisionFlag = false; // Resetujemy flagę po pewnym czasie
+                }, 1000); // Opóźnienie między kolejnymi kolizjami (1 sekunda)
+            } 
+            if (document.querySelectorAll('.live').length === 0) {
+                document.querySelector('.game-over').classList.add('show');
+                document.querySelector('.play-again').classList.add('show');
+                monster.style.display = "none";
+                cyborg.classList.add('stop-jump');
+            } 
+        } else if (cyborg.offsetTop <= 300) {
+            addPoints();
+        }
     }
-}; 
+};
 
 /* Checking if the cyborg and the monster are in the same position every 20 milliseconds. */
 setInterval(checkCollision, 20);
