@@ -56,7 +56,7 @@ checkCollision = () => {
             monster.style.display = "none";
             cyborg.classList.add('stop-jump');
         } 
-    } else {
+    } else if (cyborg.offsetTop <= 300) {
         // No collision, add points
         addPoints();
     }
