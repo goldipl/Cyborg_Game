@@ -34,11 +34,19 @@ addPoints = () => {
     points.innerText++;
 }
 
-/* Checking if the cyborg and the monster are in the same position. If they are, it will remove a life.
-If there are no lives left, it will display the game over screen. If they are not in the same
-position, it will add points. */
 checkCollision = () => {
-    if ((monster.offsetLeft === cyborg.offsetLeft) && (cyborg.offsetTop > 300)) {
+    // Getting the bounding boxes of cyborg and monster
+    const cyborgRect = cyborg.getBoundingClientRect();
+    const monsterRect = monster.getBoundingClientRect();
+
+    // Checking for collision by comparing bounding box positions
+    if (
+        cyborgRect.right >= monsterRect.left &&
+        cyborgRect.left <= monsterRect.right &&
+        cyborgRect.bottom >= monsterRect.top &&
+        cyborgRect.top <= monsterRect.bottom
+    ) {
+        // Collision happened
         if (document.querySelectorAll('.live').length !== 0) {
             document.querySelector('.live').remove();
         } 
@@ -48,9 +56,10 @@ checkCollision = () => {
             monster.style.display = "none";
             cyborg.classList.add('stop-jump');
         } 
-    } else if (monster.offsetLeft !== cyborg.offsetLeft && (cyborg.offsetTop <= 300)) {
-        addPoints();     
-    } 
+    } else {
+        // No collision, add points
+        addPoints();
+    }
 }; 
 
 /* Checking if the cyborg and the monster are in the same position every 20 milliseconds. */
