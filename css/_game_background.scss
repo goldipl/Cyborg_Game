@@ -50,6 +50,16 @@
     animation: none;
   }
 
+  img.boom-effect {
+    position: absolute;
+    bottom: 8px;
+    left: 80px;
+    width: 70px;
+    height: auto;
+    display: none;
+    z-index: 1;
+  }
+
   .points-container {
     position: absolute;
     top: 8px;

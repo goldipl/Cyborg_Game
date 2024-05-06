@@ -2,7 +2,7 @@ import { addPoints } from './points.js';
 
 let collisionFlag = false;
 
-export const checkCollision = (cyborg, monster) => {
+export const checkCollision = (cyborg, monster, boom) => {
     if (!collisionFlag) {
         const cyborgRect = cyborg.getBoundingClientRect();
         const monsterRect = monster.getBoundingClientRect();
@@ -17,9 +17,11 @@ export const checkCollision = (cyborg, monster) => {
                 document.querySelector('.live').remove();
                 collisionFlag = true;
                 monster.style.display = "none";
+                boom.style.display = "flex";
                 setTimeout(() => {
                     collisionFlag = false; 
                     monster.style.display = "flex";
+                    boom.style.display = "none";
                 }, 1000); 
             } 
             if (document.querySelectorAll('.live').length === 0) {
