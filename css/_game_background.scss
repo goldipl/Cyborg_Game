@@ -22,6 +22,7 @@
     height: 468px;
     top: 0;
     left: 0;
+    animation: animated-background 3000s;
   }
 
   img.cyborg-image {
@@ -167,5 +168,11 @@
 
   100% {
     transform: rotate(-10deg);
+  }
+}
+
+@keyframes animated-background {
+  to {
+    left: -100000px;
   }
 }

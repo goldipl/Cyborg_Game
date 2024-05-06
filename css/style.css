@@ -75,6 +75,7 @@
   height: 468px;
   top: 0;
   left: 0;
+  animation: animated-background 3000s;
 }
 .game__section img.cyborg-image {
   position: absolute;
@@ -200,6 +201,11 @@
   }
   100% {
     transform: rotate(-10deg);
+  }
+}
+@keyframes animated-background {
+  to {
+    left: -100000px;
   }
 }
 body {
