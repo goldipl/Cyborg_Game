@@ -8,10 +8,8 @@ export const jump = () => {
 };
 
 export const move = (e) => {
-    switch (e.keyCode) {
-        case 32:
-            jump();
-            break;
+    if (e.keyCode === 32) { // 32 is the key code for spacebar
+        jump();
     }
 };
 
