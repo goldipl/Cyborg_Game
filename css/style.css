@@ -2,8 +2,7 @@
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .container.main-page {
@@ -15,17 +14,10 @@
   background: url("./../img/alien-background.jpg") no-repeat;
   background-position: bottom right;
 }
-
 .container a.button01 {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   font-size: 24px;
   width: 160px;
   height: 40px;
@@ -33,23 +25,19 @@
   text-decoration: none;
   border-radius: 16px;
   margin-top: 16px;
-  -webkit-transition: 0.6s;
   transition: 0.6s;
   text-shadow: 0px 0px 12px #FFFFFF;
   cursor: pointer;
 }
-
 .container a.button01:hover {
   background: #bf63ef;
   color: #FFFFFF;
 }
-
 .container h1 {
   font-size: 48px;
   text-align: center;
   margin-bottom: 8px;
 }
-
 .container footer a {
   font-size: 6px;
   color: #000000;
@@ -64,7 +52,6 @@
     background-position: top right;
   }
 }
-
 .game-screen h1 {
   color: #000000;
 }
@@ -77,7 +64,6 @@
   border: 2px solid #000000;
   margin-top: 40px;
 }
-
 .game__section img.background-image {
   position: absolute;
   background: url(./../img/game-background.jpg);
@@ -89,7 +75,6 @@
   top: 0;
   left: 0;
 }
-
 .game__section img.cyborg-image {
   position: absolute;
   bottom: 0;
@@ -97,27 +82,20 @@
   width: 70px;
   height: auto;
 }
-
 .game__section img.monster {
   position: absolute;
   bottom: 0;
   left: 400px;
   width: 45px;
   height: auto;
-  -webkit-animation: monster 3.5s linear infinite, walk 2s linear infinite;
-          animation: monster 3.5s linear infinite, walk 2s linear infinite;
+  animation: monster 3.5s linear infinite, walk 2s linear infinite;
 }
-
 .game__section img.cyborg-image.jump {
-  -webkit-animation: jump 0.5s ease-in-out;
-          animation: jump 0.5s ease-in-out;
+  animation: jump 0.5s ease-in-out;
 }
-
 .game__section img.cyborg-image.stop-jump {
-  -webkit-animation: none;
-          animation: none;
+  animation: none;
 }
-
 .game__section .points-container {
   position: absolute;
   top: 8px;
@@ -127,7 +105,6 @@
   text-shadow: 2px 2px #000000;
   font-size: 32px;
 }
-
 .game__section .lives-container {
   position: absolute;
   top: 8px;
@@ -136,7 +113,6 @@
   width: 40px;
   height: 40px;
 }
-
 .game__section .lives-container .live {
   display: block;
   background: url(./../img/heart.svg);
@@ -146,7 +122,6 @@
   width: 40px;
   height: 40px;
 }
-
 .game__section .lives-amount {
   position: absolute;
   top: 8px;
@@ -154,33 +129,27 @@
   font-size: 28px;
   text-shadow: 2px 2px #000000;
 }
-
 .game__section .game-over {
   display: none;
 }
-
 .game__section .game-over.show {
   display: block;
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   font-size: 40px;
   text-shadow: 2px 2px #000000;
 }
-
 .game__section .play-again {
   display: none;
 }
-
 .game__section .play-again.show {
   display: block;
   position: absolute;
   top: 60%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   font-size: 32px;
   text-shadow: 2px 2px #000000;
   background: #bf63ef;
@@ -189,22 +158,11 @@
   padding: 8px;
   margin-top: 16px;
   border-radius: 16px;
-  -webkit-transition: 0.6s;
   transition: 0.6s;
   cursor: pointer;
 }
-
 .game__section .play-again.show:hover {
   color: #000000;
-}
-
-@-webkit-keyframes monster {
-  0% {
-    left: 1200px;
-  }
-  100% {
-    left: 0;
-  }
 }
 
 @keyframes monster {
@@ -215,22 +173,6 @@
     left: 0;
   }
 }
-
-@-webkit-keyframes jump {
-  0% {
-    bottom: 0px;
-  }
-  50% {
-    bottom: 130px;
-  }
-  75% {
-    bottom: 145px;
-  }
-  100% {
-    bottom: 160px;
-  }
-}
-
 @keyframes jump {
   0% {
     bottom: 0px;
@@ -245,63 +187,28 @@
     bottom: 160px;
   }
 }
-
-@-webkit-keyframes walk {
-  0% {
-    -webkit-transform: rotate(10deg);
-            transform: rotate(10deg);
-  }
-  50% {
-    -webkit-transform: rotate(-10deg);
-            transform: rotate(-10deg);
-  }
-  75% {
-    -webkit-transform: rotate(10deg);
-            transform: rotate(10deg);
-  }
-  100% {
-    -webkit-transform: rotate(-10deg);
-            transform: rotate(-10deg);
-  }
-}
-
 @keyframes walk {
   0% {
-    -webkit-transform: rotate(10deg);
-            transform: rotate(10deg);
+    transform: rotate(10deg);
   }
   50% {
-    -webkit-transform: rotate(-10deg);
-            transform: rotate(-10deg);
+    transform: rotate(-10deg);
   }
   75% {
-    -webkit-transform: rotate(10deg);
-            transform: rotate(10deg);
+    transform: rotate(10deg);
   }
   100% {
-    -webkit-transform: rotate(-10deg);
-            transform: rotate(-10deg);
+    transform: rotate(-10deg);
   }
 }
-
 body {
   color: #FFFFFF;
 }
 
 .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  font-family: 'DynaPuff', cursive;
-}
-/*# sourceMappingURL=style.css.map */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "DynaPuff", cursive;
+}/*# sourceMappingURL=style.css.map */

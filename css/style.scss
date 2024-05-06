@@ -1,17 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;600&display=swap');
-@import './reset';
-@import './mainPage';
-@import './gameBackground';
-@import './variables';
+@import url("https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;600&display=swap");
+@import "./reset";
+@import "./main_page";
+@import "./game_background";
+@import "./variables";
 
 body {
-	color: $whiteColor01;
+  color: $whiteColor01;
 }
 
 .container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	font-family: 'DynaPuff', cursive;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "DynaPuff", cursive;
 }
