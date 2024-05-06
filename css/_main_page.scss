@@ -1,52 +1,53 @@
-@import './variables';
+@import "./variables";
 .container {
-	&.main-page {
-        margin: 16px auto;
-        width: 70vw;
-        height: 80vh;
-        padding: 16px;
-        border: 2px solid $pinkColor01;
-        background: url('./../img/alien-background.jpg') no-repeat;
-        background-position: bottom right;
+  &.main-page {
+    margin: 16px auto;
+    width: 70vw;
+    height: 80vh;
+    padding: 16px;
+    border: 2px solid $pinkColor01;
+    background: url(./../img/background/alien-background.jpg);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+  }
+  a.button01 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    width: 160px;
+    height: 40px;
+    color: $azureColor01;
+    text-decoration: none;
+    border-radius: 16px;
+    margin-top: 16px;
+    transition: 0.6s;
+    text-shadow: 0px 0px 12px $whiteColor01;
+    cursor: pointer;
+    &:hover {
+      background: $pinkColor01;
+      color: $whiteColor01;
     }
-    a.button01{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 24px;
-        width: 160px;
-        height: 40px;
-        color: $azureColor01;
-        text-decoration: none;
-        border-radius: 16px;
-        margin-top: 16px;
-        transition: 0.6s;
-        text-shadow: 0px 0px 12px $whiteColor01;
-        cursor: pointer;
-        &:hover {
-            background: $pinkColor01;
-            color: $whiteColor01
-        }
-    }
-    h1 {
-        font-size: 48px;
-        text-align: center;
-        margin-bottom: 8px;
-    }
-    footer a {
-        font-size: 6px;
-        color: $blackColor01;
-        text-decoration: none;
-    }
+  }
+  h1 {
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  footer a {
+    font-size: 6px;
+    color: $blackColor01;
+    text-decoration: none;
+  }
 }
 
 @media (max-width: 600px) {
-    .container {
-        &.main-page {
-            margin: 0 auto;
-            width: 100vw;
-            height: 100vh;
-            background-position: top right;
-        }
+  .container {
+    &.main-page {
+      margin: 0 auto;
+      width: 100vw;
+      height: 100vh;
+      background-position: top right;
     }
+  }
 }

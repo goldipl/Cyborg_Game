@@ -11,7 +11,8 @@
   height: 80vh;
   padding: 16px;
   border: 2px solid #bf63ef;
-  background: url("./../img/alien-background.jpg") no-repeat;
+  background: url(./../img/background/alien-background.jpg);
+  background-repeat: no-repeat;
   background-position: bottom right;
 }
 .container a.button01 {
@@ -66,7 +67,7 @@
 }
 .game__section img.background-image {
   position: absolute;
-  background: url(./../img/game-background.jpg);
+  background: url(./../img/background/game-background.jpg);
   background-repeat: repeat-x;
   background-position: center bottom;
   background-size: 1000px 468px;
