@@ -16,8 +16,10 @@ export const checkCollision = (cyborg, monster) => {
             if (document.querySelectorAll('.live').length !== 0) {
                 document.querySelector('.live').remove();
                 collisionFlag = true;
+                monster.style.display = "none";
                 setTimeout(() => {
                     collisionFlag = false; 
+                    monster.style.display = "flex";
                 }, 1000); 
             } 
             if (document.querySelectorAll('.live').length === 0) {
