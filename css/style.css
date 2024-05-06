@@ -84,6 +84,12 @@
   width: 70px;
   height: auto;
 }
+.game__section img.cyborg-image.jump {
+  animation: jump 0.5s ease-in-out;
+}
+.game__section img.cyborg-image.stop-jump {
+  animation: none;
+}
 .game__section img.monster {
   position: absolute;
   bottom: 0;
@@ -91,12 +97,6 @@
   width: 45px;
   height: auto;
   animation: monster 3.5s linear infinite, walk 2s linear infinite;
-}
-.game__section img.cyborg-image.jump {
-  animation: jump 0.5s ease-in-out;
-}
-.game__section img.cyborg-image.stop-jump {
-  animation: none;
 }
 .game__section img.boom-effect {
   position: absolute;

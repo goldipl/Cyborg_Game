@@ -31,6 +31,12 @@
     left: 40px;
     width: 70px;
     height: auto;
+    &.jump {
+      animation: jump 0.5s ease-in-out;
+    }
+    &.stop-jump {
+      animation: none;
+    }
   }
 
   img.monster {
@@ -40,14 +46,6 @@
     width: 45px;
     height: auto;
     animation: monster 3.5s linear infinite, walk 2s linear infinite;
-  }
-
-  img.cyborg-image.jump {
-    animation: jump 0.5s ease-in-out;
-  }
-
-  img.cyborg-image.stop-jump {
-    animation: none;
   }
 
   img.boom-effect {
@@ -77,16 +75,15 @@
     display: block;
     width: 40px;
     height: 40px;
-  }
-
-  .lives-container .live {
-    display: block;
-    background: url(./../img/heart.svg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 40px 40px;
-    width: 40px;
-    height: 40px;
+    .live {
+      display: block;
+      background: url(./../img/heart.svg);
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 40px 40px;
+      width: 40px;
+      height: 40px;
+    }
   }
 
   .lives-amount {
