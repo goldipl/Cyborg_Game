@@ -22,16 +22,15 @@ export const checkCollision = (cyborg, monster, boom) => {
                     collisionFlag = false; 
                     monster.style.display = "flex";
                     boom.style.display = "none";
-                }, 1000); 
+                }, 400); 
             } 
             if (document.querySelectorAll('.live').length === 0) {
                 document.querySelector('.game-over').classList.add('show');
                 document.querySelector('.play-again').classList.add('show');
                 monster.remove();
                 cyborg.remove();
+                addPoints(0);
             } 
-        } else if (cyborg.offsetTop <= 300) {
-            addPoints(20);
-        }
+        } 
     }
 };
