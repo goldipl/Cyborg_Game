@@ -1,4 +1,8 @@
 export const addPoints = (pointsQuantity) => {
     const pointsContainer = document.querySelector('.points-container');
-    pointsContainer.innerText = parseInt(pointsContainer.innerText) + pointsQuantity;
+    let currentPoints = parseInt(pointsContainer.innerText);
+
+    currentPoints += pointsQuantity;
+    const formattedPoints = currentPoints.toString().padStart(6, '0');
+    pointsContainer.innerText = formattedPoints;
 };
