@@ -12,6 +12,8 @@ const monster = createMonster();
 const boom = addBoomEffect();
 const explosion = addExplosionEffect();
 
+let laser = createLaserAttack();
+
 setInterval(() => {
     checkCollision(cyborg, monster, boom);
     checkShot(monster, laser, explosion);
@@ -22,7 +24,6 @@ const move = (e) => {
         jump();
     } 
     if (e.keyCode === 76) {
-        let laser = createLaserAttack();
         if (laser.parentNode) {
             laser.parentNode.removeChild(laser);
         }
