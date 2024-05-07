@@ -1,8 +1,8 @@
 
 import { createMonster } from './characters/monster.js';
-import { checkCollision } from './collision.js';
+import { checkCollision } from './actions/collision.js';
 import { addBoomEffect } from './effects/boom.js';
-import { checkShot } from './shot.js';
+import { checkShot } from './actions/shot.js';
 import { createLaserAttack } from './characters/cyborg.js'
 import { jump } from './characters/cyborg.js'
 import { addExplosionEffect } from './effects/explosion.js'

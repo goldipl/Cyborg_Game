@@ -1,4 +1,4 @@
-import { addPoints } from './points.js';
+import { addPoints } from '../points.js';
 
 export const checkShot = (monster, laser, explosion) => { 
     const laserRect = laser.getBoundingClientRect();
@@ -14,7 +14,7 @@ export const checkShot = (monster, laser, explosion) => {
         addPoints(50); 
         setTimeout(() => {
             monster.style.display = "flex";
-            explosion.style.display = "none";
+            explosion.style.display = "none";  
         }, 1000); 
     } 
     if (document.querySelectorAll('.live').length === 0) {

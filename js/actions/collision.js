@@ -1,4 +1,4 @@
-import { addPoints } from './points.js';
+import { addPoints } from '../points.js';
 
 let collisionFlag = false;
 
