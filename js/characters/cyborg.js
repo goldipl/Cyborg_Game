@@ -12,6 +12,12 @@ const laserAttack = () => {
     const laser = document.createElement('div');
     laser.className = 'laser-attack';
     gameSection.appendChild(laser);
+
+    const removeLaster = () => {
+        laser.remove()
+    }
+
+    setTimeout(removeLaster, 1000)
 };
 
 export const move = (e) => {
