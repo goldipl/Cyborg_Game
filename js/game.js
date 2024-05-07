@@ -1,5 +1,5 @@
 
-import { createMonster } from './characters/monster.js';
+import { createMonster } from './characters/red-monster.js';
 import { checkCollision } from './actions/collision.js';
 import { addBoomEffect } from './effects/boom.js';
 import { checkShot } from './actions/shot.js';

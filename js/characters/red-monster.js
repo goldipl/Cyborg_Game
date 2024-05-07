@@ -2,7 +2,7 @@ const container = document.querySelector('.game-screen .container .game__section
 
 export const createMonster = () => {
     const monster = document.createElement('img');
-    monster.src = './img/characters/monster.svg';
+    monster.src = './img/characters/red-monster.svg';
     monster.width = 80;
     monster.height = 80;
     monster.classList.add('monster');
