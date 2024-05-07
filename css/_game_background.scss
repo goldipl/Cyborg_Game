@@ -86,6 +86,17 @@
     }
   }
 
+  .laser-attack {
+    position: absolute;
+    bottom: 36px;
+    left: 80px;
+    display: flex;
+    width: 100px;
+    height: 3px;
+    background-color: #ff0000;
+    animation: laser-animation 3.5s linear infinite;
+  }
+
   .lives-amount {
     position: absolute;
     top: 8px;
@@ -181,5 +192,15 @@
 @keyframes animated-background {
   to {
     left: -100000px;
+  }
+}
+
+@keyframes laser-animation {
+  0% {
+    left: 80px;
+  }
+
+  100% {
+    left: 2000px;
   }
 }
