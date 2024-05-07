@@ -8,24 +8,15 @@ export const jump = () => {
     }, 500);
 };
 
-const laserAttack = () => {
+export const createLaserAttack = () => {
     const laser = document.createElement('div');
-    laser.className = 'laser-attack';
+    laser.classList.add('laser-attack');
+
     gameSection.appendChild(laser);
 
-    const removeLaster = () => {
-        laser.remove()
-    }
+    setTimeout(() => {
+        laser.remove();
+    }, 1500);
 
-    setTimeout(removeLaster, 1500)
+    return laser;
 };
-
-export const move = (e) => {
-    if (e.keyCode === 32) { // 32 is the key code for spacebar
-        jump();
-    } else if (e.keyCode === 76) { // 76 is the key code for "L"
-        laserAttack();
-    }
-};
-
-document.addEventListener("keydown", move);

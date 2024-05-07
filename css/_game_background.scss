@@ -48,6 +48,16 @@
     animation: monster 3.5s linear infinite, walk 2s linear infinite;
   }
 
+  img.explosion-effect {
+    position: absolute;
+    bottom: 8px;
+    left: 800px;
+    width: 70px;
+    height: auto;
+    display: none;
+    z-index: 1;
+  }
+
   img.boom-effect {
     position: absolute;
     bottom: 8px;
@@ -88,13 +98,13 @@
 
   .laser-attack {
     position: absolute;
-    bottom: 36px;
+    bottom: 24px;
     left: 80px;
     display: flex;
     width: 100px;
     height: 3px;
     background-color: #ff0000;
-    animation: laser-animation 3.5s linear infinite;
+    animation: laser-animation 2s linear;
   }
 
   .lives-amount {
@@ -201,6 +211,6 @@
   }
 
   100% {
-    left: 2000px;
+    left: 1200px;
   }
 }
