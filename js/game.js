@@ -1,5 +1,5 @@
 
-import { createMonster } from './characters/red-monster.js';
+import { createRedMonster } from './characters/monsters.js';
 import { checkCollision } from './actions/collision.js';
 import { addBoomEffect } from './effects/boom.js';
 import { checkShot } from './actions/shot.js';
@@ -8,7 +8,7 @@ import { jump } from './characters/cyborg.js'
 import { addExplosionEffect } from './effects/explosion.js'
 
 const cyborg = document.querySelector(".cyborg-image");
-const redMonster = createMonster();
+const redMonster = createRedMonster();
 const boom = addBoomEffect();
 const explosion = addExplosionEffect();
 
