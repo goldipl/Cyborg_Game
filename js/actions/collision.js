@@ -2,32 +2,32 @@ import { addPoints } from '../points.js';
 
 let collisionFlag = false;
 
-export const checkCollision = (cyborg, monster, boom) => {
+export const checkCollision = (cyborg, redMonster, boom) => {
     if (!collisionFlag) {
         const cyborgRect = cyborg.getBoundingClientRect();
-        const monsterRect = monster.getBoundingClientRect();
+        const redMonsterRect = redMonster.getBoundingClientRect();
 
         if (
-            cyborgRect.right >= monsterRect.left &&
-            cyborgRect.left <= monsterRect.right &&
-            cyborgRect.bottom >= monsterRect.top &&
-            cyborgRect.top <= monsterRect.bottom
+            cyborgRect.right >= redMonsterRect.left &&
+            cyborgRect.left <= redMonsterRect.right &&
+            cyborgRect.bottom >= redMonsterRect.top &&
+            cyborgRect.top <= redMonsterRect.bottom
         ) {
             if (document.querySelectorAll('.live').length !== 0) {
                 document.querySelector('.live').remove();
                 collisionFlag = true;
-                monster.style.display = "none";
+                redMonster.style.display = "none";
                 boom.style.display = "flex";
                 setTimeout(() => {
                     collisionFlag = false; 
-                    monster.style.display = "flex";
+                    redMonster.style.display = "flex";
                     boom.style.display = "none";
                 }, 400); 
             } 
             if (document.querySelectorAll('.live').length === 0) {
                 document.querySelector('.game-over').classList.add('show');
                 document.querySelector('.play-again').classList.add('show');
-                monster.remove();
+                redMonster.remove();
                 cyborg.remove();
                 addPoints(0);
             } 

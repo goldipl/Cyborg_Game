@@ -1,27 +1,27 @@
 import { addPoints } from '../points.js';
 
-export const checkShot = (monster, laser, explosion) => { 
+export const checkShot = (redMonster, laser, explosion) => { 
     const laserRect = laser.getBoundingClientRect();
-    const monsterRect = monster.getBoundingClientRect();
+    const redMonsterRect = redMonster.getBoundingClientRect();
 
     if (
         (laserRect) &&
-        laserRect.right >= monsterRect.left &&
-        laserRect.left <= monsterRect.right &&
+        laserRect.right >= redMonsterRect.left &&
+        laserRect.left <= redMonsterRect.right &&
         document.querySelectorAll('.live').length !== 0
     ) {
-        monster.style.display = "none";
+        redMonster.style.display = "none";
         explosion.style.display = "flex";
         addPoints(50); 
         setTimeout(() => {
-            monster.style.display = "flex";
+            redMonster.style.display = "flex";
             explosion.style.display = "none";  
         }, 200); 
     } 
      else if (document.querySelectorAll('.live').length === 0) {
         document.querySelector('.game-over').classList.add('show');
         document.querySelector('.play-again').classList.add('show');
-        monster.remove();
+        redMonster.remove();
         explosion.remove();
         addPoints(0); 
     } 

@@ -8,15 +8,15 @@ import { jump } from './characters/cyborg.js'
 import { addExplosionEffect } from './effects/explosion.js'
 
 const cyborg = document.querySelector(".cyborg-image");
-const monster = createMonster();
+const redMonster = createMonster();
 const boom = addBoomEffect();
 const explosion = addExplosionEffect();
 
 let laser = createLaserAttack();
 
 setInterval(() => {
-    checkCollision(cyborg, monster, boom);
-    checkShot(monster, laser, explosion);
+    checkCollision(cyborg, redMonster, boom);
+    checkShot(redMonster, laser, explosion);
 }, 20);
 
 const move = (e) => {
