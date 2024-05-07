@@ -20,7 +20,7 @@ export const checkShot = (monster, laser, explosion) => {
     if (document.querySelectorAll('.live').length === 0) {
         document.querySelector('.game-over').classList.add('show');
         document.querySelector('.play-again').classList.add('show');
-        monster.style.display = "none";
-        explosion.style.display = "none";
+        monster.remove();
+        explosion.remove();
     } 
 };

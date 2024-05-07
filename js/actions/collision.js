@@ -27,8 +27,8 @@ export const checkCollision = (cyborg, monster, boom) => {
             if (document.querySelectorAll('.live').length === 0) {
                 document.querySelector('.game-over').classList.add('show');
                 document.querySelector('.play-again').classList.add('show');
-                monster.style.display = "none";
-                cyborg.classList.add('stop-jump');
+                monster.remove();
+                cyborg.remove();
             } 
         } else if (cyborg.offsetTop <= 300) {
             addPoints(20);
