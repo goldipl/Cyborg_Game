@@ -1,5 +1,6 @@
 
 import { createRedMonster } from './characters/monsters.js';
+import { createOrangeMonster } from './characters/monsters.js';
 import { checkCollision } from './actions/collision.js';
 import { addBoomEffect } from './effects/boom.js';
 import { checkShot } from './actions/shot.js';
@@ -9,13 +10,14 @@ import { addExplosionEffect } from './effects/explosion.js'
 
 const cyborg = document.querySelector(".cyborg-image");
 const redMonster = createRedMonster();
+const orangeMonster = createOrangeMonster();
 const boom = addBoomEffect();
 const explosion = addExplosionEffect();
 
 let laser = createLaserAttack();
 
 setInterval(() => {
-    checkCollision(cyborg, redMonster, boom);
+    checkCollision(cyborg, redMonster, orangeMonster, boom);
     checkShot(redMonster, laser, explosion);
 }, 20);
 
