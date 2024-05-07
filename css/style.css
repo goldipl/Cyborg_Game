@@ -16,7 +16,7 @@
   background-position: bottom right;
 }
 .container.main-page h1 {
-  margin-bottom: 24px;
+  margin: 24px 0;
 }
 .container.main-page .text-center {
   display: flex;
