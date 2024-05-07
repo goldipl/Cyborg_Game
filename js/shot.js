@@ -1,3 +1,5 @@
+import { addPoints } from './points.js';
+
 export const checkShot = (monster, laser, explosion) => { 
     const laserRect = laser.getBoundingClientRect();
     const monsterRect = monster.getBoundingClientRect();
@@ -9,6 +11,7 @@ export const checkShot = (monster, laser, explosion) => {
     ) {
         monster.style.display = "none";
         explosion.style.display = "flex";
+        addPoints(50); 
         setTimeout(() => {
             monster.style.display = "flex";
             explosion.style.display = "none";

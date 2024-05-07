@@ -31,7 +31,7 @@ export const checkCollision = (cyborg, monster, boom) => {
                 cyborg.classList.add('stop-jump');
             } 
         } else if (cyborg.offsetTop <= 300) {
-            addPoints();
+            addPoints(20);
         }
     }
 };

@@ -10,7 +10,7 @@ import { addExplosionEffect } from './effects/explosion.js'
 const cyborg = document.querySelector(".cyborg-image");
 const monster = createMonster();
 const boom = addBoomEffect();
-const laser = createLaserAttack();
+let laser = createLaserAttack();
 const explosion = addExplosionEffect();
 
 setInterval(() => {
@@ -19,11 +19,14 @@ setInterval(() => {
 }, 20);
 
 const move = (e) => {
-    if (e.keyCode === 32) { // 32 is the key code for spacebar 
+    if (e.keyCode === 32) {
         jump();
     } 
-    if (e.keyCode === 76) { // 76 is the key code for "L"
-        createLaserAttack();
+    if (e.keyCode === 76) {
+        if (laser.parentNode) {
+            laser.parentNode.removeChild(laser);
+        }
+        laser = createLaserAttack();
     }
 };
 
