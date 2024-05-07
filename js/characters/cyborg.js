@@ -1,8 +1,11 @@
+import { addPoints } from '../points.js';
+
 const cyborg = document.querySelector(".cyborg-image");
 const gameSection = document.querySelector("section.game__section");
 
 export const jump = () => {
     cyborg.classList.add('jump');
+    addPoints(2); 
     setTimeout(() => {
         cyborg.classList.remove('jump')
     }, 500);
