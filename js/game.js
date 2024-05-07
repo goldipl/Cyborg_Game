@@ -10,7 +10,6 @@ import { addExplosionEffect } from './effects/explosion.js'
 const cyborg = document.querySelector(".cyborg-image");
 const monster = createMonster();
 const boom = addBoomEffect();
-let laser = createLaserAttack();
 const explosion = addExplosionEffect();
 
 setInterval(() => {
@@ -23,6 +22,7 @@ const move = (e) => {
         jump();
     } 
     if (e.keyCode === 76) {
+        let laser = createLaserAttack();
         if (laser.parentNode) {
             laser.parentNode.removeChild(laser);
         }
