@@ -9,6 +9,19 @@
     background: url(./../img/background/alien-background.jpg);
     background-repeat: no-repeat;
     background-position: bottom right;
+    h1 {
+      margin-bottom: 24px;
+    }
+    .text-center {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      img {
+        display: flex;
+        margin: 0 8px;
+        border-radius: 6px;
+      }
+    }
   }
   a.button01 {
     display: flex;
