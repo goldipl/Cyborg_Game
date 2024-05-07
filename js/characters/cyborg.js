@@ -17,7 +17,7 @@ const laserAttack = () => {
         laser.remove()
     }
 
-    setTimeout(removeLaster, 1000)
+    setTimeout(removeLaster, 1500)
 };
 
 export const move = (e) => {
