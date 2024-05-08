@@ -1,0 +1,65 @@
+.button01 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  width: max-content;
+  height: 40px;
+  color: $azureColor01;
+  text-decoration: none;
+  border-radius: 16px;
+  margin-top: 16px;
+  transition: 0.6s;
+  text-shadow: 0px 0px 12px $whiteColor01;
+  padding: 0 24px;
+  cursor: pointer;
+  &:hover {
+    background: $pinkColor01;
+    color: $whiteColor01;
+  }
+}
+
+.button02 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  width: max-content;
+  height: 40px;
+  background: $pinkColor01;
+  color: $whiteColor01;
+  text-decoration: none;
+  border-radius: 16px;
+  margin-top: 16px;
+  transition: 0.6s;
+  text-shadow: 0px 0px 12px $blackColor01;
+  padding: 0 24px;
+  cursor: pointer;
+  &:hover {
+    color: $azureColor01;
+  }
+}
+
+.play-again {
+  display: none;
+  &.show {
+    display: block;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
+    text-shadow: 2px 2px $blackColor01;
+    background: $pinkColor01;
+    color: $whiteColor01;
+    text-decoration: none;
+    margin-top: 16px;
+    border-radius: 16px;
+    padding: 6px 16px;
+    transition: 0.6s;
+    cursor: pointer;
+    &:hover {
+      color: $azureColor01;
+    }
+  }
+}

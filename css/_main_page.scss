@@ -23,26 +23,6 @@
       }
     }
   }
-  a.button01 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    width: max-content;
-    height: 40px;
-    color: $azureColor01;
-    text-decoration: none;
-    border-radius: 16px;
-    margin-top: 16px;
-    transition: 0.6s;
-    text-shadow: 0px 0px 12px $whiteColor01;
-    padding: 0 24px;
-    cursor: pointer;
-    &:hover {
-      background: $pinkColor01;
-      color: $whiteColor01;
-    }
-  }
   h1 {
     font-size: 48px;
     text-align: center;
