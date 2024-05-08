@@ -117,6 +117,34 @@
       font-size: 40px;
       text-shadow: 2px 2px $blackColor01;
     }
+    &_result {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: absolute;
+      top: 25%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #29c6b952;
+      padding: 16px;
+      border-radius: 24px;
+      p {
+        font-size: 0;
+      }
+      &.show {
+        span {
+          text-align: center;
+          color: #ffffff;
+          font-size: 24px;
+          text-shadow: 2px 2px $blackColor01;
+        }
+        p {
+          color: #00ffff;
+          font-size: 56px;
+          text-shadow: 2px 2px $blackColor01;
+        }
+      }
+    }
   }
 
   .play-again {

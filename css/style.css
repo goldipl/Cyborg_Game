@@ -178,6 +178,32 @@
   font-size: 40px;
   text-shadow: 2px 2px #000000;
 }
+.game__section .game-over_result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(41, 198, 185, 0.3215686275);
+  padding: 16px;
+  border-radius: 24px;
+}
+.game__section .game-over_result p {
+  font-size: 0;
+}
+.game__section .game-over_result.show span {
+  text-align: center;
+  color: #ffffff;
+  font-size: 24px;
+  text-shadow: 2px 2px #000000;
+}
+.game__section .game-over_result.show p {
+  color: #00ffff;
+  font-size: 56px;
+  text-shadow: 2px 2px #000000;
+}
 .game__section .play-again {
   display: none;
 }
