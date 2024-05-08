@@ -1,14 +1,21 @@
 import { addPoints } from '../points.js';
+import { gameOver } from './gameOver.js';
 
 export const checkShot = (redMonster, laser, explosion) => {
     const isAlive = document.querySelectorAll('.live').length !== 0;
     const laserRect = laser.getBoundingClientRect();
     const redMonsterRect = redMonster.getBoundingClientRect();
 
+    const EndOfTheGame = () => {
+        gameOver();
+        redMonster.remove();
+        cyborg.remove();
+    }
+
     if (isAlive && isColliding(laserRect, redMonsterRect)) {
         handleShotHit(redMonster, explosion);
     } else if (!isAlive) {
-        handleGameOver(redMonster, explosion);
+        EndOfTheGame();
     }
 };
 
@@ -27,15 +34,4 @@ const handleShotHit = (redMonster, explosion) => {
         redMonster.style.display = "flex";
         explosion.style.display = "none";
     }, 200);
-};
-
-const handleGameOver = (redMonster, explosion) => {
-    const gameOverElement = document.querySelector('.game-over');
-    const playAgainElement = document.querySelector('.play-again');
-
-    gameOverElement.classList.add('show');
-    playAgainElement.classList.add('show');
-    redMonster.remove();
-    explosion.remove();
-    addPoints(0);
 };

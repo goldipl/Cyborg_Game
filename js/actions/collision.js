@@ -1,9 +1,9 @@
-import { addPoints } from '../points.js';
+import { gameOver } from "./gameOver.js";
 
 let collisionFlag = false;
 
 export const checkCollision = (cyborg, redMonster, orangeMonster, boom) => {
-    if (collisionFlag) return; // Exit early if collision already detected
+    if (collisionFlag) return;
 
     const cyborgRect = cyborg.getBoundingClientRect();
     const redMonsterRect = redMonster.getBoundingClientRect();
@@ -23,6 +23,13 @@ export const checkCollision = (cyborg, redMonster, orangeMonster, boom) => {
         cyborgRect.top <= orangeMonsterRect.bottom
     );
 
+    const EndOfTheGame = () => {
+        gameOver();
+        orangeMonster.remove();
+        redMonster.remove();
+        cyborg.remove();
+    }
+
     if (isRedMonsterColliding) {
         const liveElements = document.querySelectorAll('.live');
 
@@ -37,11 +44,7 @@ export const checkCollision = (cyborg, redMonster, orangeMonster, boom) => {
                 boom.style.display = "none";
             }, 400);
         } else {
-            document.querySelector('.game-over').classList.add('show');
-            document.querySelector('.play-again').classList.add('show');
-            redMonster.remove();
-            cyborg.remove();
-            addPoints(0);
+            EndOfTheGame();
         }
     } else if (isOrangeMonsterColliding) {
         const liveElements = document.querySelectorAll('.live');
@@ -57,11 +60,7 @@ export const checkCollision = (cyborg, redMonster, orangeMonster, boom) => {
                 boom.style.display = "none";
             }, 400);
         } else {
-            document.querySelector('.game-over').classList.add('show');
-            document.querySelector('.play-again').classList.add('show');
-            orangeMonster.remove();
-            cyborg.remove();
-            addPoints(0);
+            EndOfTheGame();
         }
     }
 };
