@@ -291,6 +291,10 @@ img.monster.orange {
     transform: rotate(-10deg);
   }
 }
+footer a {
+  display: none;
+}
+
 body {
   color: #FFFFFF;
 }
