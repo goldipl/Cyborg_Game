@@ -33,6 +33,8 @@ Project was created with:
 
 ## Live
 
+Wanna play? Click link below & have fun!
+
 https://goldipl.github.io/Cyborg_Game/
 
 ## Background image info
