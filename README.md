@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="./img/screenshots/readme_logo.jpg"/>
+</p>
+
 ## Table of contents
 
 - [General info](#general-info)
