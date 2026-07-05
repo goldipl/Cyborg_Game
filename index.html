@@ -1,42 +1,1183 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyborg Game</title>
-    <link rel="shortcut icon" href="./img/characters/cyborg.svg">
-    <link rel="stylesheet" href="./css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CYBORG // RUN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ RESET ============ */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root{
+  --void:#0a0e1a;
+  --void-2:#0f1626;
+  --panel:#121a2c;
+  --panel-edge:#1e2a44;
+  --cyan:#36ebff;
+  --cyan-dim:#1a8fa3;
+  --magenta:#ff2e93;
+  --amber:#ffb627;
+  --mist:#e8f4ff;
+  --mist-dim:#8ea3c4;
+  --danger:#ff4757;
+  --shadow-hard: 0 0 0 rgba(0,0,0,0);
+  --font-display:'Chakra Petch', sans-serif;
+  --font-body:'Space Grotesk', sans-serif;
+}
+
+html,body{
+  background:var(--void);
+  color:var(--mist);
+  font-family:var(--font-body);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+body{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:32px 16px 60px;
+  position:relative;
+}
+
+/* ambient backdrop grid */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(var(--panel-edge) 1px, transparent 1px),
+    linear-gradient(90deg, var(--panel-edge) 1px, transparent 1px);
+  background-size:48px 48px;
+  opacity:0.18;
+  pointer-events:none;
+  z-index:0;
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:radial-gradient(ellipse at 50% 0%, rgba(54,235,255,0.08), transparent 60%);
+  pointer-events:none;
+  z-index:0;
+}
+
+.wrap{ position:relative; z-index:1; width:100%; max-width:1040px; display:flex; flex-direction:column; align-items:center; }
+
+/* ============ HEADER / BRAND ============ */
+.brand{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  margin-bottom:6px;
+}
+.brand-mark{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(28px,5vw,42px);
+  letter-spacing:2px;
+  color:var(--mist);
+  text-shadow:0 0 18px rgba(54,235,255,0.55);
+}
+.brand-mark span{ color:var(--cyan); }
+.brand-tag{
+  font-family:var(--font-display);
+  font-size:12px;
+  letter-spacing:4px;
+  color:var(--magenta);
+  text-transform:uppercase;
+  border:1px solid var(--magenta);
+  padding:3px 8px;
+  border-radius:3px;
+  opacity:0.85;
+}
+.subtitle{ color:var(--mist-dim); font-size:14px; margin-bottom:22px; letter-spacing:0.3px; }
+.subtitle b{ color:var(--cyan); font-weight:600; }
+
+/* ============ GAME FRAME ============ */
+.stage-shell{
+  position:relative;
+  width:100%;
+  border-radius:18px;
+  padding:2px;
+  background:linear-gradient(135deg, var(--cyan-dim), var(--panel-edge) 40%, var(--magenta) 100%);
+  box-shadow:0 30px 80px -30px rgba(0,0,0,0.7), 0 0 60px -20px rgba(54,235,255,0.15);
+}
+
+.stage{
+  position:relative;
+  width:100%;
+  aspect-ratio:1000/468;
+  max-height:70vh;
+  border-radius:16px;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 120%, #1a2440 0%, transparent 60%),
+    linear-gradient(180deg, #0d1420 0%, #131c30 55%, #1a2438 100%);
+}
+
+/* parallax layers */
+.parallax{ position:absolute; inset:0; will-change:transform; }
+.layer-stars{
+  background-image:
+    radial-gradient(1.5px 1.5px at 10% 20%, rgba(232,244,255,0.6), transparent),
+    radial-gradient(1px 1px at 30% 60%, rgba(232,244,255,0.4), transparent),
+    radial-gradient(2px 2px at 55% 15%, rgba(54,235,255,0.5), transparent),
+    radial-gradient(1px 1px at 70% 45%, rgba(232,244,255,0.5), transparent),
+    radial-gradient(1.5px 1.5px at 85% 75%, rgba(232,244,255,0.4), transparent),
+    radial-gradient(1px 1px at 95% 25%, rgba(255,46,147,0.4), transparent);
+  background-repeat:repeat-x;
+  background-size:400px 100%;
+}
+.layer-mountains{
+  bottom:0; height:55%; top:auto;
+  background:linear-gradient(180deg, transparent, rgba(20,28,48,0.9));
+  clip-path:polygon(0% 100%, 0% 60%, 6% 45%, 14% 65%, 22% 30%, 30% 58%, 40% 20%, 50% 55%, 58% 35%, 68% 60%, 78% 25%, 88% 52%, 96% 38%, 100% 55%, 100% 100%);
+  background-color:#161f34;
+  background-repeat:repeat-x;
+  background-size:1000px 100%;
+}
+.layer-ground{
+  bottom:0; top:auto; height:14%;
+  background:linear-gradient(180deg, #212c46, #0c1120);
+  border-top:2px solid rgba(54,235,255,0.35);
+  box-shadow:0 -2px 20px rgba(54,235,255,0.12);
+}
+.layer-ground::before{
+  content:"";
+  position:absolute; inset:0;
+  background-image:repeating-linear-gradient(90deg, rgba(54,235,255,0.25) 0 2px, transparent 2px 60px);
+  background-size:400px 100%;
+  background-repeat:repeat-x;
+}
+
+/* scanline / CRT signature */
+.crt{
+  position:absolute; inset:0; pointer-events:none; z-index:30;
+  background:repeating-linear-gradient(180deg, rgba(0,0,0,0.12) 0px, rgba(0,0,0,0.12) 1px, transparent 1px, transparent 3px);
+  mix-blend-mode:overlay;
+}
+.vignette{
+  position:absolute; inset:0; pointer-events:none; z-index:29;
+  box-shadow:inset 0 0 90px 20px rgba(0,0,0,0.55);
+}
+
+/* ============ ENTITIES ============ */
+.cyborg{
+  position:absolute;
+  bottom:14%;
+  left:60px;
+  width:52px;
+  height:70px;
+  z-index:10;
+  transition:filter 0.15s;
+}
+.cyborg svg{ width:100%; height:100%; overflow:visible; filter:drop-shadow(0 6px 10px rgba(0,0,0,0.5)); }
+.cyborg.jump{ animation:jumpArc var(--jump-dur,0.62s) cubic-bezier(.32,.15,.3,1); }
+.cyborg.double-jump{ animation:jumpArc2 var(--jump-dur,0.62s) cubic-bezier(.22,.4,.3,1); }
+.cyborg.shield-on .shield-ring{ opacity:1; }
+.cyborg.hit{ filter:brightness(2) drop-shadow(0 0 12px var(--danger)); }
+.cyborg.dead{ opacity:0; transition:opacity 0.4s; }
+
+@keyframes jumpArc{
+  0%{ bottom:14%; }
+  40%{ bottom:46%; }
+  55%{ bottom:50%; }
+  100%{ bottom:14%; }
+}
+@keyframes jumpArc{
+  0%{ bottom:14%; transform:rotate(0); }
+  35%{ bottom:48%; transform:rotate(-8deg);}
+  55%{ bottom:52%; transform:rotate(4deg);}
+  100%{ bottom:14%; transform:rotate(0); }
+}
+@keyframes jumpArc2{
+  0%{ bottom:14%; transform:rotate(0) scale(1);}
+  25%{ bottom:40%; transform:rotate(-10deg) scale(1.02);}
+  50%{ bottom:60%; transform:rotate(0) scale(1.05);}
+  75%{ bottom:40%; transform:rotate(10deg) scale(1.02);}
+  100%{ bottom:14%; transform:rotate(0) scale(1);}
+}
+
+.monster{
+  position:absolute;
+  bottom:14%;
+  width:46px;
+  height:46px;
+  z-index:8;
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+}
+.monster svg{ width:100%; height:100%; }
+.monster.walk{ animation:monsterWalk 0.5s ease-in-out infinite; }
+.monster.dying{ animation:monsterPop 0.25s ease-out forwards; }
+@keyframes monsterWalk{
+  0%,100%{ transform:rotate(-6deg) translateY(0); }
+  50%{ transform:rotate(6deg) translateY(-3px); }
+}
+@keyframes monsterPop{
+  to{ transform:scale(1.6); opacity:0; }
+}
+
+.laser{
+  position:absolute;
+  height:4px;
+  border-radius:2px;
+  background:linear-gradient(90deg, rgba(255,46,147,0), var(--magenta) 30%, #fff);
+  box-shadow:0 0 12px 2px var(--magenta), 0 0 3px #fff;
+  z-index:9;
+}
+
+.pickup{
+  position:absolute;
+  bottom:14%;
+  width:34px;
+  height:34px;
+  z-index:7;
+  animation:pickupFloat 1.4s ease-in-out infinite;
+  filter:drop-shadow(0 0 8px currentColor);
+}
+@keyframes pickupFloat{
+  0%,100%{ transform:translateY(0) rotate(0deg); }
+  50%{ transform:translateY(-10px) rotate(180deg); }
+}
+
+.particle{
+  position:absolute;
+  width:5px; height:5px;
+  border-radius:50%;
+  z-index:12;
+  pointer-events:none;
+}
+
+/* ============ HUD ============ */
+.hud{
+  position:absolute; inset:0;
+  z-index:20;
+  pointer-events:none;
+  font-family:var(--font-display);
+}
+.hud-top{
+  position:absolute; top:0; left:0; right:0;
+  display:flex; justify-content:space-between; align-items:flex-start;
+  padding:14px 18px;
+}
+.hud-score{ display:flex; flex-direction:column; gap:2px; }
+.hud-label{ font-size:10px; letter-spacing:3px; color:var(--mist-dim); text-transform:uppercase; }
+.hud-value{
+  font-size:clamp(22px,3.4vw,30px);
+  font-weight:700;
+  color:var(--cyan);
+  letter-spacing:2px;
+  text-shadow:0 0 14px rgba(54,235,255,0.6);
+  font-variant-numeric:tabular-nums;
+}
+.combo-badge{
+  font-size:13px;
+  color:var(--amber);
+  opacity:0;
+  transform:translateY(4px);
+  transition:opacity 0.2s, transform 0.2s;
+  text-shadow:0 0 10px rgba(255,182,39,0.7);
+}
+.combo-badge.show{ opacity:1; transform:translateY(0); }
+
+.hud-lives{ display:flex; gap:6px; }
+.life-pip{
+  width:26px; height:26px;
+  position:relative;
+}
+.life-pip svg{ width:100%; height:100%; filter:drop-shadow(0 0 6px rgba(255,46,147,0.6)); }
+.life-pip.lost svg{ opacity:0.15; filter:none; }
+
+.hud-mid-right{
+  position:absolute; top:56px; right:18px;
+  display:flex; flex-direction:column; align-items:flex-end; gap:6px;
+}
+.status-chip{
+  display:flex; align-items:center; gap:6px;
+  font-size:11px; letter-spacing:1.5px;
+  padding:4px 9px;
+  border-radius:20px;
+  background:rgba(10,14,26,0.7);
+  border:1px solid var(--panel-edge);
+  opacity:0;
+  transform:translateX(6px);
+  transition:opacity 0.2s, transform 0.2s;
+}
+.status-chip.show{ opacity:1; transform:translateX(0); }
+.status-chip.shield{ color:var(--cyan); border-color:var(--cyan-dim); }
+.status-chip.rapid{ color:var(--magenta); border-color:var(--magenta); }
+.status-chip .bar{ width:34px; height:3px; background:var(--panel-edge); border-radius:2px; overflow:hidden; }
+.status-chip .bar i{ display:block; height:100%; background:currentColor; transform-origin:left; }
+
+/* threat meter — the signature element */
+.threat-meter{
+  position:absolute; bottom:10px; left:50%; transform:translateX(-50%);
+  width:min(320px, 60%);
+  display:flex; flex-direction:column; align-items:center; gap:3px;
+}
+.threat-label{ font-size:9px; letter-spacing:3px; color:var(--mist-dim); text-transform:uppercase; }
+.threat-track{
+  width:100%; height:5px;
+  background:rgba(255,255,255,0.06);
+  border-radius:3px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.08);
+}
+.threat-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg, var(--cyan), var(--amber) 60%, var(--danger));
+  transition:width 0.6s ease;
+  box-shadow:0 0 10px currentColor;
+}
+
+/* ============ OVERLAYS (start / pause / gameover) ============ */
+.overlay{
+  position:absolute; inset:0; z-index:40;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(8,11,20,0.82);
+  backdrop-filter:blur(3px);
+  opacity:0; pointer-events:none;
+  transition:opacity 0.25s;
+}
+.overlay.show{ opacity:1; pointer-events:auto; }
+
+.panel{
+  width:min(420px,90%);
+  background:linear-gradient(180deg, var(--panel), var(--void-2));
+  border:1px solid var(--panel-edge);
+  border-radius:14px;
+  padding:28px 26px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+}
+.panel-eyebrow{
+  font-family:var(--font-display);
+  font-size:11px;
+  letter-spacing:4px;
+  color:var(--magenta);
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.panel h2{
+  font-family:var(--font-display);
+  font-size:clamp(26px,4vw,34px);
+  color:var(--mist);
+  margin-bottom:6px;
+  letter-spacing:1px;
+}
+.panel p{ color:var(--mist-dim); font-size:14px; margin-bottom:18px; line-height:1.5; }
+
+.stat-row{
+  display:flex; justify-content:center; gap:28px;
+  margin-bottom:22px;
+}
+.stat{ display:flex; flex-direction:column; gap:2px; }
+.stat .n{ font-family:var(--font-display); font-size:26px; color:var(--cyan); font-weight:700; }
+.stat .l{ font-size:10px; letter-spacing:2px; color:var(--mist-dim); text-transform:uppercase; }
+.stat.best .n{ color:var(--amber); }
+
+.key-hints{
+  display:flex; justify-content:center; gap:18px;
+  margin-bottom:20px; flex-wrap:wrap;
+}
+.key-hint{ display:flex; flex-direction:column; align-items:center; gap:6px; }
+.key{
+  font-family:var(--font-display);
+  font-size:11px;
+  min-width:34px;
+  padding:6px 8px;
+  border-radius:6px;
+  background:var(--void-2);
+  border:1px solid var(--panel-edge);
+  border-bottom-width:3px;
+  color:var(--mist);
+}
+.key-hint span{ font-size:10px; color:var(--mist-dim); letter-spacing:0.5px; }
+
+.btn-primary{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:15px;
+  letter-spacing:1.5px;
+  color:var(--void);
+  background:linear-gradient(135deg, var(--cyan), #7ef5ff);
+  border:none;
+  border-radius:8px;
+  padding:13px 34px;
+  cursor:pointer;
+  text-transform:uppercase;
+  box-shadow:0 8px 20px -6px rgba(54,235,255,0.6);
+  transition:transform 0.15s, box-shadow 0.15s;
+}
+.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 12px 26px -6px rgba(54,235,255,0.75); }
+.btn-primary:active{ transform:translateY(0); }
+.btn-primary:focus-visible{ outline:2px solid var(--mist); outline-offset:3px; }
+
+.btn-ghost{
+  font-family:var(--font-display);
+  font-size:12px;
+  letter-spacing:1.5px;
+  color:var(--mist-dim);
+  background:transparent;
+  border:1px solid var(--panel-edge);
+  border-radius:8px;
+  padding:10px 20px;
+  cursor:pointer;
+  text-transform:uppercase;
+  margin-top:10px;
+  transition:color 0.15s, border-color 0.15s;
+}
+.btn-ghost:hover{ color:var(--mist); border-color:var(--mist-dim); }
+.btn-ghost:focus-visible{ outline:2px solid var(--mist); outline-offset:2px; }
+
+.new-best{
+  display:inline-block;
+  font-size:11px; letter-spacing:2px;
+  color:var(--amber);
+  border:1px solid var(--amber);
+  border-radius:20px;
+  padding:3px 10px;
+  margin-bottom:14px;
+  text-transform:uppercase;
+  animation:pulseGlow 1.2s ease-in-out infinite;
+}
+@keyframes pulseGlow{
+  0%,100%{ box-shadow:0 0 0px rgba(255,182,39,0); }
+  50%{ box-shadow:0 0 14px rgba(255,182,39,0.6); }
+}
+
+/* pause icon toggle top-left of stage */
+.pause-btn{
+  position:absolute; top:14px; left:50%; transform:translateX(-50%);
+  z-index:21;
+  width:34px; height:34px;
+  border-radius:8px;
+  border:1px solid var(--panel-edge);
+  background:rgba(10,14,26,0.55);
+  color:var(--mist-dim);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  pointer-events:auto;
+  transition:color 0.15s, border-color 0.15s;
+}
+.pause-btn:hover{ color:var(--cyan); border-color:var(--cyan-dim); }
+.pause-btn:focus-visible{ outline:2px solid var(--cyan); outline-offset:2px; }
+
+/* ============ FOOTER NAV / BELOW STAGE ============ */
+.below{
+  width:100%;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:12px;
+  margin-top:18px;
+}
+.legend{
+  display:flex; gap:16px; flex-wrap:wrap;
+}
+.legend-item{ display:flex; align-items:center; gap:7px; font-size:12px; color:var(--mist-dim); }
+.legend-swatch{ width:16px; height:16px; border-radius:4px; }
+.nav-links{ display:flex; gap:10px; }
+.nav-link{
+  font-family:var(--font-display);
+  font-size:12px;
+  letter-spacing:1px;
+  color:var(--mist-dim);
+  text-decoration:none;
+  border:1px solid var(--panel-edge);
+  border-radius:7px;
+  padding:8px 14px;
+  transition:color 0.15s, border-color 0.15s;
+}
+.nav-link:hover{ color:var(--cyan); border-color:var(--cyan-dim); }
+.nav-link.primary{ color:var(--void); background:var(--cyan); border-color:var(--cyan); }
+.nav-link.primary:hover{ color:var(--void); opacity:0.9; }
+
+footer.credit{ margin-top:28px; font-size:11px; color:var(--mist-dim); opacity:0.6; text-align:center; }
+footer.credit a{ color:inherit; }
+
+@media (max-width:640px){
+  .stage-shell{ display:none; }
+  .mobile-block{ display:flex !important; }
+}
+.mobile-block{
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  text-align:center;
+  padding:60px 24px;
+  border:1px solid var(--panel-edge);
+  border-radius:16px;
+  background:var(--panel);
+  width:100%;
+}
+.mobile-block .glyph{ font-size:40px; }
+.mobile-block h2{ font-family:var(--font-display); color:var(--mist); }
+.mobile-block p{ color:var(--mist-dim); font-size:14px; max-width:320px; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+}
+</style>
 </head>
-
 <body>
-    <div class="container main-page">
-        <h1>Cyborg Game</h1>
-        <h6>Only desktop version!</h6>
-        <a class="button01" onclick='check()'>Play</a>
-        <a href="./howtoplay.html" class="button01">How to play?</a>
-        <a href="./author.html" class="button01">Author</a>
 
-        <footer>
-            <a href="https://www.freepik.com/vectors/alien-planet">Alien planet vector created by upklyak - www.freepik.com</a>
-        </footer>
+<div class="wrap">
+
+  <div class="brand">
+    <div class="brand-mark">CYBORG <span>// RUN</span></div>
+    <div class="brand-tag">v2</div>
+  </div>
+  <div class="subtitle">Jump the swarm. Snipe the reds. <b>Ambers are laserproof</b> — dodge or die.</div>
+
+  <div class="stage-shell">
+    <div class="stage" id="stage">
+
+      <div class="parallax layer-stars" id="layerStars"></div>
+      <div class="parallax layer-mountains" id="layerMountains"></div>
+      <div class="parallax layer-ground" id="layerGround"></div>
+
+      <!-- entities injected here -->
+      <div class="cyborg" id="cyborg">
+        <svg viewBox="0 0 52 70" fill="none">
+          <circle class="shield-ring" cx="26" cy="34" r="30" stroke="#36ebff" stroke-width="2" opacity="0" style="transition:opacity 0.2s;">
+            <animate attributeName="r" values="28;31;28" dur="1.6s" repeatCount="indefinite"/>
+          </circle>
+          <!-- legs -->
+          <rect x="14" y="52" width="7" height="16" rx="3" fill="#2c3550"/>
+          <rect x="30" y="52" width="7" height="16" rx="3" fill="#2c3550"/>
+          <rect x="13" y="64" width="9" height="5" rx="2" fill="#36ebff"/>
+          <rect x="29" y="64" width="9" height="5" rx="2" fill="#36ebff"/>
+          <!-- torso -->
+          <rect x="11" y="24" width="30" height="30" rx="8" fill="#3a4568"/>
+          <rect x="16" y="30" width="20" height="12" rx="3" fill="#141a2c"/>
+          <rect x="18" y="32" width="6" height="4" rx="1" fill="#36ebff"/>
+          <rect x="26" y="32" width="6" height="4" rx="1" fill="#ff2e93"/>
+          <!-- arm -->
+          <rect x="36" y="28" width="16" height="8" rx="4" fill="#3a4568"/>
+          <circle cx="50" cy="32" r="4" fill="#36ebff"/>
+          <rect x="2" y="28" width="12" height="8" rx="4" fill="#3a4568"/>
+          <!-- head -->
+          <circle cx="26" cy="14" r="14" fill="#4a5680"/>
+          <rect x="16" y="9" width="20" height="8" rx="4" fill="#141a2c"/>
+          <circle cx="21" cy="13" r="3" fill="#36ebff"/>
+          <circle cx="31" cy="13" r="3" fill="#36ebff"/>
+          <rect x="23" y="0" width="6" height="6" rx="1" fill="#ff2e93"/>
+        </svg>
+      </div>
+
+      <!-- HUD -->
+      <div class="hud">
+        <div class="hud-top">
+          <div class="hud-score">
+            <div class="hud-label">Score</div>
+            <div class="hud-value" id="scoreValue">000000</div>
+            <div class="combo-badge" id="comboBadge">×2 COMBO</div>
+          </div>
+          <div class="hud-lives" id="livesRow"></div>
+        </div>
+
+        <div class="hud-mid-right" id="statusChips">
+          <div class="status-chip shield" id="chipShield">
+            <span>SHIELD</span>
+            <div class="bar"><i id="shieldBar" style="width:100%"></i></div>
+          </div>
+          <div class="status-chip rapid" id="chipRapid">
+            <span>RAPID</span>
+            <div class="bar"><i id="rapidBar" style="width:100%"></i></div>
+          </div>
+        </div>
+
+        <button class="pause-btn" id="pauseBtn" title="Pause (Esc)" aria-label="Pause game">❚❚</button>
+
+        <div class="threat-meter">
+          <div class="threat-label">Threat Level</div>
+          <div class="threat-track"><div class="threat-fill" id="threatFill"></div></div>
+        </div>
+      </div>
+
+      <div class="vignette"></div>
+      <div class="crt"></div>
+
+      <!-- START overlay -->
+      <div class="overlay show" id="overlayStart">
+        <div class="panel">
+          <div class="panel-eyebrow">Sector 7 // Reclaimed</div>
+          <h2>Ready to run?</h2>
+          <p>Jump the horde, laser the reds, and dodge every amber — they shrug off shots. Chain kills fast for combo multipliers.</p>
+          <div class="stat-row">
+            <div class="stat best">
+              <div class="n" id="bestScoreStart">000000</div>
+              <div class="l">Best Score</div>
+            </div>
+          </div>
+          <div class="key-hints">
+            <div class="key-hint"><div class="key">SPACE</div><span>Jump</span></div>
+            <div class="key-hint"><div class="key">L</div><span>Laser</span></div>
+            <div class="key-hint"><div class="key">ESC</div><span>Pause</span></div>
+          </div>
+          <button class="btn-primary" id="btnStart">Start Run</button>
+        </div>
+      </div>
+
+      <!-- PAUSE overlay -->
+      <div class="overlay" id="overlayPause">
+        <div class="panel">
+          <div class="panel-eyebrow">Signal Paused</div>
+          <h2>Holding position</h2>
+          <p>Systems idle. Resume whenever you're ready.</p>
+          <button class="btn-primary" id="btnResume">Resume</button>
+          <br>
+          <button class="btn-ghost" id="btnRestartFromPause">Restart Run</button>
+        </div>
+      </div>
+
+      <!-- GAME OVER overlay -->
+      <div class="overlay" id="overlayOver">
+        <div class="panel">
+          <div class="panel-eyebrow">Signal Lost</div>
+          <h2>Run terminated</h2>
+          <div id="newBestTag" class="new-best" style="display:none;">New Best</div>
+          <div class="stat-row">
+            <div class="stat">
+              <div class="n" id="finalScore">000000</div>
+              <div class="l">Score</div>
+            </div>
+            <div class="stat best">
+              <div class="n" id="finalBest">000000</div>
+              <div class="l">Best</div>
+            </div>
+          </div>
+          <button class="btn-primary" id="btnRetry">Run Again</button>
+        </div>
+      </div>
+
     </div>
+  </div>
 
-    <script>
-    //It's checking if the device is mobile or desktop. 
-    //If it's mobile, it will redirect to error.html.
-    //If it's desktop, it will redirect to game.html.
-        check = () => {
-            if ((window.innerWidth <= 800) && (window.innerHeight <= 960)) {
-                window.location.href = "./error.html";
-                console.log("mobile");
-            } else {
-                window.location.href = "./game.html";
-                console.log("desktop");
-            }
+  <div class="mobile-block">
+    <div class="glyph">🖥️</div>
+    <h2>Desktop signal required</h2>
+    <p>CYBORG // RUN needs a keyboard for jump &amp; laser input. Open this on a desktop browser to play.</p>
+  </div>
+
+  <div class="below">
+    <div class="legend">
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--magenta)"></span>Red — shoot or skip</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--amber)"></span>Amber — laserproof, skip only</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--cyan)"></span>Shield pickup</div>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="nav-link">How to Play</a>
+      <a href="#" class="nav-link">Author</a>
+      <a href="#" class="nav-link primary">Menu</a>
+    </div>
+  </div>
+
+  <footer class="credit">Alien planet backdrop concept — reimagined in CSS/SVG, no external art required.</footer>
+
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  // ---------- CONFIG ----------
+  const CFG = {
+    baseSpeed: 3.2,          // px per tick, scales with difficulty
+    maxSpeed: 7.5,
+    difficultyRampMs: 12000, // every N ms, ramp up
+    spawnBaseGapMs: [1400, 2600],
+    spawnMinGapMs: [650, 1200],
+    laserCooldownMs: 550,
+    laserCooldownRapidMs: 180,
+    laserDurationMs: 900,
+    laserWidth: 90,
+    doubleJumpWindowMs: 380,
+    shieldDurationMs: 6000,
+    rapidDurationMs: 6000,
+    pickupChance: 0.16,      // chance a spawn slot becomes a pickup instead of monster
+    comboWindowMs: 1400,
+    livesStart: 3,
+  };
+
+  const STORAGE_KEY = 'cyborgRunBestScore';
+
+  // ---------- DOM ----------
+  const stage = document.getElementById('stage');
+  const cyborgEl = document.getElementById('cyborg');
+  const scoreValueEl = document.getElementById('scoreValue');
+  const comboBadgeEl = document.getElementById('comboBadge');
+  const livesRowEl = document.getElementById('livesRow');
+  const threatFillEl = document.getElementById('threatFill');
+  const chipShield = document.getElementById('chipShield');
+  const chipRapid = document.getElementById('chipRapid');
+  const shieldBar = document.getElementById('shieldBar');
+  const rapidBar = document.getElementById('rapidBar');
+  const pauseBtn = document.getElementById('pauseBtn');
+
+  const overlayStart = document.getElementById('overlayStart');
+  const overlayPause = document.getElementById('overlayPause');
+  const overlayOver = document.getElementById('overlayOver');
+  const bestScoreStartEl = document.getElementById('bestScoreStart');
+  const finalScoreEl = document.getElementById('finalScore');
+  const finalBestEl = document.getElementById('finalBest');
+  const newBestTag = document.getElementById('newBestTag');
+
+  const layerStars = document.getElementById('layerStars');
+  const layerMountains = document.getElementById('layerMountains');
+  const layerGround = document.getElementById('layerGround');
+
+  // ---------- STATE ----------
+  let state = 'start'; // start | playing | paused | over
+  let score = 0;
+  let best = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10) || 0;
+  let lives = CFG.livesStart;
+  let combo = 0;
+  let lastKillAt = 0;
+  let elapsedMs = 0;
+  let lastFrameTime = 0;
+  let speedMultiplier = 1;
+  let nextSpawnAt = 0;
+  let shieldUntil = 0;
+  let rapidUntil = 0;
+  let lastLaserAt = -9999;
+  let jumpState = 'grounded'; // grounded | up | cooldownForDouble | usedDouble
+  let jumpArmedUntil = 0;
+  let invulnerableUntil = 0; // brief post-hit invulnerability
+  let scrollOffset = 0;
+
+  let entities = []; // {type:'red'|'amber'|'shieldPickup'|'rapidPickup', el, x, dying}
+  let lasers = [];   // {el, x, spawnedAt}
+  let particles = [];
+
+  // ---------- HELPERS ----------
+  const stageWidth = () => stage.getBoundingClientRect().width;
+  const scaleFactor = () => stageWidth() / 1000; // design width 1000
+
+  function formatScore(n){ return n.toString().padStart(6,'0'); }
+
+  function setScore(n){
+    score = Math.max(0, n);
+    scoreValueEl.textContent = formatScore(Math.floor(score));
+  }
+
+  function addScore(n){
+    setScore(score + n);
+  }
+
+  function updateLivesUI(){
+    livesRowEl.innerHTML = '';
+    for(let i=0;i<CFG.livesStart;i++){
+      const pip = document.createElement('div');
+      pip.className = 'life-pip' + (i < lives ? '' : ' lost');
+      pip.innerHTML = `<svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7.5-4.6-10-9.3C0.2 8.4 2 5 5.4 5c2 0 3.4 1.1 4.6 2.8C11.2 6.1 12.6 5 14.6 5 18 5 19.8 8.4 22 11.7 19.5 16.4 12 21 12 21z" fill="${i<lives ? 'var(--magenta)' : '#2c3550'}"/></svg>`;
+      livesRowEl.appendChild(pip);
+    }
+  }
+
+  function threatPct(){
+    return Math.min(1, (speedMultiplier - 1) / (CFG.maxSpeed/CFG.baseSpeed - 1));
+  }
+  function updateThreatUI(){
+    threatFillEl.style.width = (threatPct()*100).toFixed(0) + '%';
+  }
+
+  function spawnParticles(xPct, yPct, color, count=10){
+    for(let i=0;i<count;i++){
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.background = color;
+      p.style.left = xPct + '%';
+      p.style.bottom = yPct + '%';
+      const angle = Math.random()*Math.PI*2;
+      const dist = 20 + Math.random()*40;
+      const dur = 300 + Math.random()*300;
+      stage.appendChild(p);
+      const start = performance.now();
+      particles.push({el:p, start, dur, angle, dist, baseX:xPct, baseY:yPct});
+    }
+  }
+
+  function tickParticles(now){
+    particles = particles.filter(p => {
+      const t = (now - p.start) / p.dur;
+      if(t >= 1){ p.el.remove(); return false; }
+      const dx = Math.cos(p.angle) * p.dist * t;
+      const dy = Math.sin(p.angle) * p.dist * t;
+      p.el.style.transform = `translate(${dx}px, ${-dy}px)`;
+      p.el.style.opacity = String(1-t);
+      return true;
+    });
+  }
+
+  // ---------- ENTITY FACTORIES ----------
+  function svgMonster(color){
+    return `<svg viewBox="0 0 46 46" fill="none">
+      <ellipse cx="23" cy="30" rx="16" ry="13" fill="${color}"/>
+      <circle cx="23" cy="16" r="14" fill="${color}"/>
+      <circle cx="17" cy="14" r="4" fill="#141a2c"/>
+      <circle cx="29" cy="14" r="4" fill="#141a2c"/>
+      <circle cx="17" cy="14" r="1.6" fill="#fff"/>
+      <circle cx="29" cy="14" r="1.6" fill="#fff"/>
+      <path d="M12 24 Q23 32 34 24" stroke="#141a2c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M8 6 L13 12 M38 6 L33 12 M23 0 L23 7" stroke="${color}" stroke-width="3" stroke-linecap="round"/>
+    </svg>`;
+  }
+
+  function svgPickup(kind){
+    if(kind === 'shieldPickup'){
+      return `<svg viewBox="0 0 34 34" fill="none"><path d="M17 2 L29 7 V17 C29 25 24 30 17 32 C10 30 5 25 5 17 V7 Z" fill="#36ebff" opacity="0.9"/><path d="M17 2 L29 7 V17 C29 25 24 30 17 32 C10 30 5 25 5 17 V7 Z" stroke="#e8f4ff" stroke-width="1.5" fill="none"/></svg>`;
+    }
+    return `<svg viewBox="0 0 34 34" fill="none"><rect x="6" y="6" width="22" height="22" rx="4" fill="#ff2e93" opacity="0.9" transform="rotate(45 17 17)"/><circle cx="17" cy="17" r="5" fill="#fff"/></svg>`;
+  }
+
+  function spawnEntity(){
+    const roll = Math.random();
+    let type;
+    if(roll < CFG.pickupChance * 0.5) type = 'shieldPickup';
+    else if(roll < CFG.pickupChance) type = 'rapidPickup';
+    else if(roll < CFG.pickupChance + (1-CFG.pickupChance)*0.55) type = 'red';
+    else type = 'amber';
+
+    const el = document.createElement('div');
+    const startXPx = stageWidth() + 40;
+
+    if(type === 'red' || type === 'amber'){
+      el.className = 'monster walk';
+      el.innerHTML = svgMonster(type === 'red' ? 'var(--magenta)' : 'var(--amber)');
+    } else {
+      el.className = 'pickup';
+      el.style.color = type === 'shieldPickup' ? 'var(--cyan)' : 'var(--magenta)';
+      el.innerHTML = svgPickup(type);
+    }
+    el.style.left = startXPx + 'px';
+    stage.appendChild(el);
+
+    entities.push({ type, el, x:startXPx, dying:false });
+  }
+
+  function scheduleNextSpawn(now){
+    const [minBase, maxBase] = CFG.spawnBaseGapMs;
+    const [minFloor, maxFloor] = CFG.spawnMinGapMs;
+    const t = threatPct();
+    const lo = minBase + (minFloor-minBase)*t;
+    const hi = maxBase + (maxFloor-maxBase)*t;
+    nextSpawnAt = now + lo + Math.random()*(hi-lo);
+  }
+
+  // ---------- JUMP / LASER ----------
+  function doJump(){
+    if(state !== 'playing') return;
+    const now = performance.now();
+
+    if(jumpState === 'grounded'){
+      jumpState = 'up';
+      jumpArmedUntil = now + CFG.doubleJumpWindowMs;
+      cyborgEl.classList.remove('double-jump');
+      cyborgEl.style.setProperty('--jump-dur','0.62s');
+      void cyborgEl.offsetWidth;
+      cyborgEl.classList.add('jump');
+      addScore(2);
+      setTimeout(() => {
+        cyborgEl.classList.remove('jump');
+        if(jumpState === 'up') jumpState = 'grounded';
+      }, 620);
+    } else if(jumpState === 'up' && now < jumpArmedUntil){
+      jumpState = 'usedDouble';
+      cyborgEl.classList.remove('jump');
+      void cyborgEl.offsetWidth;
+      cyborgEl.style.setProperty('--jump-dur','0.6s');
+      cyborgEl.classList.add('double-jump');
+      addScore(4);
+      spawnParticles(9, 24, 'var(--cyan)', 8);
+      setTimeout(() => {
+        cyborgEl.classList.remove('double-jump');
+        jumpState = 'grounded';
+      }, 600);
+    }
+  }
+
+  function doLaser(){
+    if(state !== 'playing') return;
+    const now = performance.now();
+    const cooldown = now < rapidUntil ? CFG.laserCooldownRapidMs : CFG.laserCooldownMs;
+    if(now - lastLaserAt < cooldown) return;
+    lastLaserAt = now;
+
+    const el = document.createElement('div');
+    el.className = 'laser';
+    const startXPx = 96;
+    el.style.left = startXPx + 'px';
+    el.style.bottom = '22%';
+    el.style.width = CFG.laserWidth + 'px';
+    stage.appendChild(el);
+    lasers.push({ el, x:startXPx, spawnedAt: now });
+  }
+
+  // ---------- COLLISION ----------
+  function rectsOverlap(a, b){
+    return a.right >= b.left && a.left <= b.right && a.bottom >= b.top && a.top <= b.bottom;
+  }
+
+  function registerCombo(now){
+    if(now - lastKillAt < CFG.comboWindowMs){
+      combo += 1;
+    } else {
+      combo = 1;
+    }
+    lastKillAt = now;
+    if(combo >= 2){
+      comboBadgeEl.textContent = `×${combo} COMBO`;
+      comboBadgeEl.classList.add('show');
+      clearTimeout(registerCombo._t);
+      registerCombo._t = setTimeout(() => comboBadgeEl.classList.remove('show'), 1000);
+    }
+    return combo;
+  }
+
+  function killMonster(ent, now, viaLaser){
+    ent.dying = true;
+    ent.el.classList.add('dying');
+    const rect = ent.el.getBoundingClientRect();
+    const stageRect = stage.getBoundingClientRect();
+    const xPct = ((rect.left + rect.width/2 - stageRect.left) / stageRect.width) * 100;
+    const color = ent.type === 'red' ? 'var(--magenta)' : 'var(--amber)';
+    spawnParticles(xPct, 20, color, 14);
+
+    const c = registerCombo(now);
+    addScore(50 * Math.max(1, Math.min(c,5)));
+
+    setTimeout(() => ent.el.remove(), 260);
+  }
+
+  function loseLife(now){
+    if(now < invulnerableUntil) return false;
+    invulnerableUntil = now + 900;
+    lives -= 1;
+    updateLivesUI();
+    cyborgEl.classList.add('hit');
+    setTimeout(() => cyborgEl.classList.remove('hit'), 260);
+    combo = 0;
+    comboBadgeEl.classList.remove('show');
+    if(lives <= 0){
+      endGame();
+      return true;
+    }
+    return false;
+  }
+
+  function collectPickup(ent, now){
+    ent.dying = true;
+    const rect = ent.el.getBoundingClientRect();
+    const stageRect = stage.getBoundingClientRect();
+    const xPct = ((rect.left + rect.width/2 - stageRect.left) / stageRect.width) * 100;
+
+    if(ent.type === 'shieldPickup'){
+      shieldUntil = now + CFG.shieldDurationMs;
+      cyborgEl.classList.add('shield-on');
+      spawnParticles(xPct, 20, 'var(--cyan)', 12);
+    } else {
+      rapidUntil = now + CFG.rapidDurationMs;
+      spawnParticles(xPct, 20, 'var(--magenta)', 12);
+    }
+    addScore(25);
+    ent.el.remove();
+  }
+
+  // ---------- GAME LOOP ----------
+  function loop(now){
+    if(!lastFrameTime) lastFrameTime = now;
+    const dt = now - lastFrameTime;
+    lastFrameTime = now;
+
+    if(state === 'playing'){
+      elapsedMs += dt;
+      speedMultiplier = Math.min(CFG.maxSpeed/CFG.baseSpeed, 1 + elapsedMs / CFG.difficultyRampMs * 0.55);
+      updateThreatUI();
+
+      const speed = CFG.baseSpeed * speedMultiplier * (dt/16.6);
+
+      // background scroll
+      scrollOffset -= speed * 0.6;
+      layerStars.style.backgroundPosition = (scrollOffset*0.3) + 'px 0';
+      layerMountains.style.backgroundPosition = (scrollOffset*0.6) + 'px 0';
+      layerGround.style.backgroundPosition = scrollOffset + 'px 0';
+
+      // idle score trickle for survival
+      addScore(dt * 0.004);
+
+      // status timers
+      if(shieldUntil > now){
+        chipShield.classList.add('show');
+        shieldBar.style.width = Math.max(0, (shieldUntil-now)/CFG.shieldDurationMs*100) + '%';
+      } else {
+        chipShield.classList.remove('show');
+        cyborgEl.classList.remove('shield-on');
+      }
+      if(rapidUntil > now){
+        chipRapid.classList.add('show');
+        rapidBar.style.width = Math.max(0, (rapidUntil-now)/CFG.rapidDurationMs*100) + '%';
+      } else {
+        chipRapid.classList.remove('show');
+      }
+
+      // spawn
+      if(now >= nextSpawnAt){
+        spawnEntity();
+        scheduleNextSpawn(now);
+      }
+
+      // move entities
+      const cyborgRect = cyborgEl.getBoundingClientRect();
+      entities = entities.filter(ent => {
+        if(ent.dying) return true;
+        ent.x -= speed;
+        ent.el.style.left = ent.x + 'px';
+
+        if(ent.x < -60){
+          ent.el.remove();
+          return false;
         }
-    </script>
-</body>
 
+        const entRect = ent.el.getBoundingClientRect();
+        if(rectsOverlap(cyborgRect, entRect)){
+          if(ent.type === 'shieldPickup' || ent.type === 'rapidPickup'){
+            collectPickup(ent, now);
+            return false;
+          } else {
+            if(now < shieldUntil){
+              // shield absorbs — destroy monster, no life lost
+              killMonster(ent, now, false);
+              return false;
+            }
+            const died = loseLife(now);
+            ent.dying = true;
+            ent.el.style.display = 'none';
+            setTimeout(() => ent.el.remove(), 50);
+            if(died) return false;
+            return false;
+          }
+        }
+        return true;
+      });
+
+      // move lasers, check hits on reds only
+      lasers = lasers.filter(l => {
+        const age = now - l.spawnedAt;
+        if(age > CFG.laserDurationMs){ l.el.remove(); return false; }
+        const laserRect = l.el.getBoundingClientRect();
+        // check against reds
+        for(const ent of entities){
+          if(ent.dying || ent.type !== 'red') continue;
+          const entRect = ent.el.getBoundingClientRect();
+          if(rectsOverlap(laserRect, entRect)){
+            killMonster(ent, now, true);
+          }
+        }
+        return true;
+      });
+
+      tickParticles(now);
+    }
+
+    requestAnimationFrame(loop);
+  }
+
+  // ---------- STATE TRANSITIONS ----------
+  function resetRun(){
+    entities.forEach(e => e.el.remove());
+    lasers.forEach(l => l.el.remove());
+    particles.forEach(p => p.el.remove());
+    entities = []; lasers = []; particles = [];
+
+    setScore(0);
+    lives = CFG.livesStart;
+    combo = 0; lastKillAt = 0;
+    elapsedMs = 0; speedMultiplier = 1;
+    shieldUntil = 0; rapidUntil = 0; lastLaserAt = -9999;
+    jumpState = 'grounded';
+    invulnerableUntil = 0;
+    cyborgEl.classList.remove('shield-on','hit','jump','double-jump');
+    updateLivesUI();
+    updateThreatUI();
+    comboBadgeEl.classList.remove('show');
+    chipShield.classList.remove('show');
+    chipRapid.classList.remove('show');
+    scheduleNextSpawn(performance.now());
+  }
+
+  function startGame(){
+    resetRun();
+    state = 'playing';
+    lastFrameTime = 0;
+    overlayStart.classList.remove('show');
+    overlayOver.classList.remove('show');
+    overlayPause.classList.remove('show');
+  }
+
+  function pauseGame(){
+    if(state !== 'playing') return;
+    state = 'paused';
+    overlayPause.classList.add('show');
+  }
+
+  function resumeGame(){
+    if(state !== 'paused') return;
+    state = 'playing';
+    lastFrameTime = 0;
+    overlayPause.classList.remove('show');
+  }
+
+  function endGame(){
+    state = 'over';
+    const finalScoreInt = Math.floor(score);
+    let isNewBest = false;
+    if(finalScoreInt > best){
+      best = finalScoreInt;
+      localStorage.setItem(STORAGE_KEY, String(best));
+      isNewBest = true;
+    }
+    finalScoreEl.textContent = formatScore(finalScoreInt);
+    finalBestEl.textContent = formatScore(best);
+    newBestTag.style.display = isNewBest ? 'inline-block' : 'none';
+    overlayOver.classList.add('show');
+  }
+
+  // ---------- INPUT ----------
+  document.addEventListener('keydown', (e) => {
+    if(e.code === 'Space'){
+      e.preventDefault();
+      if(state === 'start'){ startGame(); return; }
+      doJump();
+    } else if(e.key === 'l' || e.key === 'L'){
+      doLaser();
+    } else if(e.key === 'Escape'){
+      if(state === 'playing') pauseGame();
+      else if(state === 'paused') resumeGame();
+    }
+  });
+
+  document.getElementById('btnStart').addEventListener('click', startGame);
+  document.getElementById('btnRetry').addEventListener('click', startGame);
+  document.getElementById('btnResume').addEventListener('click', resumeGame);
+  document.getElementById('btnRestartFromPause').addEventListener('click', startGame);
+  pauseBtn.addEventListener('click', () => {
+    if(state === 'playing') pauseGame();
+    else if(state === 'paused') resumeGame();
+  });
+
+  // ---------- INIT ----------
+  bestScoreStartEl.textContent = formatScore(best);
+  updateLivesUI();
+  updateThreatUI();
+  requestAnimationFrame(loop);
+
+})();
+</script>
+</body>
 </html>
