@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./img/readme_logo.jpg"/>
+    CYBORG // RUN v2
 </p>
 
 ## Table of contents
