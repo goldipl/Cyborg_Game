@@ -23,7 +23,7 @@ Project was created with:
 
 ## Screenshots
 
-![Screenshot](./img/screenshots/Screenshot00.jpg)
+![Screenshot](./img/screenshots/screenshot01.jpg)
 
 ## Live
 
