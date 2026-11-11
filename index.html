@@ -490,8 +490,21 @@ body::after{
   border:1px solid var(--panel-edge);
   border-radius:7px;
   padding:8px 14px;
+  background:transparent;
+  cursor:pointer;
   transition:color 0.15s, border-color 0.15s;
 }
+.nav-link:focus-visible{ outline:2px solid var(--cyan); outline-offset:2px; }
+
+.howto-list{
+  list-style:none;
+  text-align:left;
+  display:flex; flex-direction:column; gap:10px;
+  margin-bottom:22px;
+}
+.howto-list li{ display:flex; align-items:center; gap:12px; font-size:13px; color:var(--mist-dim); line-height:1.4; }
+.howto-list .key{ flex-shrink:0; text-align:center; }
+.howto-list .legend-swatch{ flex-shrink:0; margin:0 9px; }
 .nav-link:hover{ color:var(--cyan); border-color:var(--cyan-dim); }
 .nav-link.primary{ color:var(--void); background:var(--cyan); border-color:var(--cyan); }
 .nav-link.primary:hover{ color:var(--void); opacity:0.9; }
@@ -633,6 +646,24 @@ body::after{
         </div>
       </div>
 
+      <!-- HOW TO PLAY overlay -->
+      <div class="overlay" id="overlayHowTo">
+        <div class="panel">
+          <div class="panel-eyebrow">Field Manual</div>
+          <h2>How to play</h2>
+          <ul class="howto-list">
+            <li><span class="key">SPACE</span>Jump — press again mid-air for a double jump</li>
+            <li><span class="key">L</span>Fire laser — destroys red monsters</li>
+            <li><span class="key">ESC</span>Pause / resume the run</li>
+            <li><span class="legend-swatch" style="background:var(--magenta)"></span>Red — shoot it or jump over it</li>
+            <li><span class="legend-swatch" style="background:var(--amber)"></span>Amber — laserproof, jump over it</li>
+            <li><span class="legend-swatch" style="background:var(--cyan)"></span>Pickups — shield &amp; rapid fire</li>
+          </ul>
+          <p>Chain kills quickly for combo multipliers. You have 3 lives — make them count.</p>
+          <button class="btn-primary" id="btnCloseHowTo">Got it</button>
+        </div>
+      </div>
+
       <!-- GAME OVER overlay -->
       <div class="overlay" id="overlayOver">
         <div class="panel">
@@ -669,9 +700,9 @@ body::after{
       <div class="legend-item"><span class="legend-swatch" style="background:var(--cyan)"></span>Shield pickup</div>
     </div>
     <div class="nav-links">
-      <a href="#" class="nav-link">How to Play</a>
-      <a href="#" class="nav-link">Author</a>
-      <a href="#" class="nav-link primary">Menu</a>
+      <button type="button" class="nav-link" id="navHowTo">How to Play</button>
+      <a href="https://mgodlewskidev.pl/" class="nav-link" target="_blank" rel="noopener noreferrer">Author</a>
+      <button type="button" class="nav-link primary" id="navMenu">Menu</button>
     </div>
   </div>
 
@@ -718,6 +749,7 @@ body::after{
   const overlayStart = document.getElementById('overlayStart');
   const overlayPause = document.getElementById('overlayPause');
   const overlayOver = document.getElementById('overlayOver');
+  const overlayHowTo = document.getElementById('overlayHowTo');
   const bestScoreStartEl = document.getElementById('bestScoreStart');
   const finalScoreEl = document.getElementById('finalScore');
   const finalBestEl = document.getElementById('finalBest');
@@ -1128,6 +1160,42 @@ body::after{
     overlayPause.classList.remove('show');
   }
 
+  // How to Play sits on top of whatever screen is active; a running game is paused first.
+  let howToOpen = false;
+  let howToHidden = null; // overlay temporarily hidden while How to Play is shown
+
+  function openHowTo(){
+    if(howToOpen) return;
+    if(state === 'playing'){
+      state = 'paused';
+      howToHidden = overlayPause; // after closing, land on the pause screen
+    } else {
+      howToHidden = [overlayStart, overlayPause, overlayOver].find(o => o.classList.contains('show')) || null;
+    }
+    if(howToHidden) howToHidden.classList.remove('show');
+    howToOpen = true;
+    overlayHowTo.classList.add('show');
+    document.getElementById('btnCloseHowTo').focus();
+  }
+
+  function closeHowTo(){
+    if(!howToOpen) return;
+    howToOpen = false;
+    overlayHowTo.classList.remove('show');
+    if(howToHidden) howToHidden.classList.add('show');
+    howToHidden = null;
+  }
+
+  function goToMenu(){
+    if(howToOpen){ howToOpen = false; howToHidden = null; overlayHowTo.classList.remove('show'); }
+    resetRun();
+    state = 'start';
+    overlayPause.classList.remove('show');
+    overlayOver.classList.remove('show');
+    bestScoreStartEl.textContent = formatScore(best);
+    overlayStart.classList.add('show');
+  }
+
   function endGame(){
     state = 'over';
     const finalScoreInt = Math.floor(score);
@@ -1145,6 +1213,10 @@ body::after{
 
   // ---------- INPUT ----------
   document.addEventListener('keydown', (e) => {
+    if(howToOpen){
+      if(e.key === 'Escape' || e.key === 'Enter' || e.code === 'Space'){ e.preventDefault(); closeHowTo(); }
+      return;
+    }
     if(e.code === 'Space'){
       e.preventDefault();
       if(state === 'start'){ startGame(); return; }
@@ -1162,9 +1234,14 @@ body::after{
   document.getElementById('btnResume').addEventListener('click', resumeGame);
   document.getElementById('btnRestartFromPause').addEventListener('click', startGame);
   pauseBtn.addEventListener('click', () => {
+    if(howToOpen) return;
     if(state === 'playing') pauseGame();
     else if(state === 'paused') resumeGame();
   });
+
+  document.getElementById('btnCloseHowTo').addEventListener('click', closeHowTo);
+  document.getElementById('navHowTo').addEventListener('click', (e) => { e.currentTarget.blur(); openHowTo(); });
+  document.getElementById('navMenu').addEventListener('click', (e) => { e.currentTarget.blur(); goToMenu(); });
 
   // ---------- INIT ----------
   bestScoreStartEl.textContent = formatScore(best);
